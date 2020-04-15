@@ -1,0 +1,193 @@
+﻿<Controls:MetroWindow x:Class="Crimson.Views.GameWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:local="clr-namespace:Crimson.Views"
+                      xmlns:viewmodel="clr-namespace:Crimson.ViewModels"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+                      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                      mc:Ignorable="d"
+                      Title="RUST - выберите оружие" 
+                      Height="220" Width="420" 
+                      ResizeMode="NoResize" 
+                      WindowStartupLocation="CenterScreen"
+                      FontFamily="Candara"
+                      >
+
+    <Grid Margin="5">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.25*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.1*"/>
+            <RowDefinition/>
+            <RowDefinition Height="1.25*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        Margin="5"
+                        >
+
+            <Label Content="Оружие:"
+                       Foreground="Crimson"
+                       Style="{StaticResource MetroLabel}"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       />
+
+            <ComboBox Style="{StaticResource MetroComboBox}"
+                      ItemsSource="{Binding Weapons}"
+                      DisplayMemberPath="Name"
+                      SelectedIndex="{Binding SelectedWeaponIndex}"
+                      Width="150"
+                      Foreground="Crimson"
+                      BorderBrush="Crimson"
+                      Controls:ControlsHelper.FocusBorderBrush="Crimson"
+                      BorderThickness="2"
+                      />
+
+        </StackPanel>
+
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="1">
+            <Button Margin="5,5,5,5"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Command="{Binding ClearWeapon}"
+                    Content="Очистить"
+                    Foreground="Crimson" 
+                    FontSize="14"
+                    BorderBrush="Crimson"
+                    BorderThickness="2"
+                    Controls:ControlsHelper.ContentCharacterCasing="Normal"
+                    Width="80"
+                    />
+
+            <Button Grid.Column="1"
+                    Margin="5,5,5,5"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Content="Закрыть"
+                    Foreground="Crimson"
+                    FontSize="14"
+                    BorderBrush="Crimson"
+                    BorderThickness="2"
+                    Controls:ControlsHelper.ContentCharacterCasing="Normal"
+                    Width="80"
+                    >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:CallMethodAction 
+                        TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Controls:MetroWindow}}}" 
+                        MethodName="Close"
+                        />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    >
+            <ContentControl Width="52"
+                            Height="52"
+                            Content="{StaticResource AlertIcon}"
+                            />
+            <TextBlock
+                       TextWrapping="Wrap"
+                       FontSize="14"
+                       Foreground="Crimson" 
+                       Width="353"
+                       >
+                    В настройках игры установить один из вариантов:
+                <LineBreak/>
+                 - Чувствительность мыши=1.0 и угол обзора(FOV)=75
+                <LineBreak/>
+                 - Чувствительность мыши=0.8 и угол обзора(FOV)=90
+            </TextBlock>
+        </StackPanel>
+        <!-- Пока не нужна кнопка - 'Установить кнопки' -->
+        <!--<Button Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="5,5,5,5"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Command="{Binding SetHotKeys}"
+                    Content="Установить кнопки"
+                    Foreground="Crimson"
+                    FontSize="14"
+                    BorderBrush="Crimson"
+                    BorderThickness="2" 
+                    Controls:ControlsHelper.ContentCharacterCasing="Normal"
+                    />-->
+
+
+        <Grid Grid.Row="2"
+              Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        Width="100">
+                <TextBlock Text="Статус:"
+                           Foreground="White"
+                           Margin="2"
+                           />
+                <TextBlock Margin="2"
+                           Width="55">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="Неактивен"/>
+                            <Setter Property="Foreground" Value="Red"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMacroEnabled}" Value="true">
+                                    <Setter Property="Text" Value="Активен"/>
+                                    <Setter Property="Foreground" Value="Green"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+
+            <ToggleButton Grid.Row="1"
+                          Width="100"
+                          HorizontalAlignment="Center"
+                          Margin="2"
+                          Command="{Binding ActivateMacros}"
+                          CommandParameter="{Binding IsChecked,RelativeSource={RelativeSource Self}}"
+                          FontSize="14"
+                          BorderThickness="2"
+                          IsChecked="{Binding IsMacroEnabled}"
+                          >
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton" BasedOn="{StaticResource MetroToggleButton}">
+                        <Setter Property="Background" Value="#FF252525"/>
+                        <Setter Property="Foreground" Value="Crimson"/>
+                        <Setter Property="Content" Value="Включить"/>
+                        <Setter Property="BorderBrush" Value="Crimson"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="#FF252525"/>
+                                <Setter Property="Foreground" Value="Green"/>
+                                <Setter Property="Content" Value="Выключить"/>
+                                <Setter Property="BorderBrush" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <!--Если убрать - граница будет белого цвета.-->
+                                <Setter Property="BorderBrush" Value="Crimson"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

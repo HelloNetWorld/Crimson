@@ -1,0 +1,123 @@
+﻿<Controls:MetroWindow x:Class="Crimson.Views.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:viewmodel="clr-namespace:Crimson.ViewModels"
+                      Title="Crimson"
+                      Height="700"
+                      Width="800" 
+                      FontFamily="Candara"
+                      ResizeMode="NoResize" 
+                      WindowStartupLocation="CenterScreen"
+                      >
+    <Window.DataContext>
+        <viewmodel:MainWindowVM/>
+    </Window.DataContext>
+
+
+    <DockPanel>
+        <Border DockPanel.Dock="Top"
+                BorderThickness="2"
+                BorderBrush="Crimson"
+                Margin="5">
+            <Button 
+                Style="{StaticResource SquareButtonStyle}"
+                Margin="5"
+                Padding="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="Установить клавишу включения/отключения работы макроса"
+                Foreground="Crimson"
+                Width="Auto" 
+                Height="Auto" 
+                BorderBrush="Crimson"
+                BorderThickness="2"
+                FontSize="14"
+                Command="{Binding SetActivasionKey}" 
+                Controls:ControlsHelper.ContentCharacterCasing="Normal"
+                />
+        </Border>
+
+
+
+        <StatusBar DockPanel.Dock="Bottom"
+                   Height="32"
+                   Style="{StaticResource MetroStatusBar}">
+            <StatusBarItem Margin="5">
+                <TextBlock Name="lblCurrentActivationButton" 
+                           Text="{Binding StringFormat=Текущая кнопка включения/отключения: {0}, Path=ActivasionKey}"
+                           Foreground="White"
+                           >
+
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+
+        <!--<Border BorderThickness="2"
+                BorderBrush="Crimson"
+                Margin="5"
+                DockPanel.Dock="Bottom">
+            <StackPanel 
+                        Orientation="Horizontal">
+                <Button x:Name="btnSettings"
+                        Style="{StaticResource SquareMetroButton}"
+                        Height="30"
+                        Width="100"
+                        Content="Settings" FontSize="12"/>
+            </StackPanel>
+        </Border>-->
+        <ItemsControl Margin="5"
+                 ItemsSource="{Binding UserGames}" 
+                 Width="782"
+                 >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"
+                                 Rows="2"
+                                 />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding OpenGameWindow}"
+                            Style="{StaticResource SquareButtonStyle}"
+                            BorderThickness="0">
+                        <Grid 
+                              >
+                            <Image Width="Auto"
+                                   Height="Auto"
+                                   Source="{Binding Icon}"
+                                   Stretch="Fill"
+                                   />
+
+                            <TextBlock Text="{Binding Name}" 
+                                       Margin="0,5"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Center"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="Crimson"
+                                       />
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+            <!--<UniformGrid Margin="5">
+                <UniformGrid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}">
+                        <Setter Property="Margin" Value="5"></Setter>
+                    </Style>
+                </UniformGrid.Resources>
+                <Button Height="100"
+                    Width="100"
+                    Content="RUST"/>
+                <Button Height="100"
+                    Width="100"
+                    Content="PUBG"/>
+            </UniformGrid>-->
+
+
+        </ItemsControl>
+    </DockPanel>
+</Controls:MetroWindow>
