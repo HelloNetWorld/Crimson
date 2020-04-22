@@ -43,3 +43,7 @@ C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Debug\Resources\Sounds\de
 C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Debug\Resources\Sounds\excellent.mp3
 C:\Users\Виктор\source\repos\Crimson\Crimson\obj\Debug\Crimson.csprojAssemblyReference.cache
 C:\Users\Виктор\source\repos\Crimson\Crimson\obj\Debug\Resources\Icons\Icons.baml
+C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Debug\Crimson.DataAccessLayer.dll
+C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Debug\Crimson.Models.dll
+C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Debug\Crimson.DataAccessLayer.pdb
+C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Debug\Crimson.Models.pdb

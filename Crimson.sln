@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crimson", "Crimson\Crimson.csproj", "{BBBA81F3-8872-4B55-A27C-F81C2C9E4EC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crimson.Models", "Crimson.Model\Crimson.Models.csproj", "{4605120C-DB05-46B1-8F27-38AAFBC14CB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crimson.DataAccessLayer", "Crimson.DataAccessLayer\Crimson.DataAccessLayer.csproj", "{D74B21BC-11C1-4120-BD21-5D41979512BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BBBA81F3-8872-4B55-A27C-F81C2C9E4EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBBA81F3-8872-4B55-A27C-F81C2C9E4EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBBA81F3-8872-4B55-A27C-F81C2C9E4EC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4605120C-DB05-46B1-8F27-38AAFBC14CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4605120C-DB05-46B1-8F27-38AAFBC14CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4605120C-DB05-46B1-8F27-38AAFBC14CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4605120C-DB05-46B1-8F27-38AAFBC14CB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D74B21BC-11C1-4120-BD21-5D41979512BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D74B21BC-11C1-4120-BD21-5D41979512BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D74B21BC-11C1-4120-BD21-5D41979512BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D74B21BC-11C1-4120-BD21-5D41979512BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

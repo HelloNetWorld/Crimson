@@ -36,7 +36,7 @@ namespace Crimson.ViewModels
                         ActivasionKey = _manager.HotKey.ToString()
                     };
                     w.DataContext = vm;
-                    w.Show();
+                    w.ShowDialog();
                 });
             }
         }
@@ -73,10 +73,13 @@ namespace Crimson.ViewModels
                 {
 
                     var w = new GameWindow();
-                    var vm = new GameWindowVM(_game,_manager);
+                    var vm = new GameWindowVM(_game, _manager)
+                    {
+                        IsMacroEnabled = _manager.PerformAllowByKey,
+                    };
 
                     w.DataContext = vm;
-                    w.Show();
+                    w.ShowDialog();
                 });
             }
         }

@@ -1,5 +1,8 @@
 ﻿namespace Crimson.Model
 {
+
+
+
     public class Weapon
     {
         public string Name { get; set; }
@@ -7,10 +10,6 @@
     }
     public class MacroInfo
     {
-        public int? Interval { get; set; }
-        public int? SemiAutoDelay { get; set; }
-        public int? Ammo { get; set; }
-
         public CordsShift[] CordsShifts { get; set; }
     }
     public class CordsShift

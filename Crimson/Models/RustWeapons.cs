@@ -774,8 +774,6 @@ namespace Crimson.Model
                 Name = "P250 Semi-automatic pistol",
                 MacroInfoForWeapon = new MacroInfo()
                 {
-                    Ammo = 10,
-                    SemiAutoDelay = 23,
                     CordsShifts = new CordsShift[4]
                     {
                         #region Инициализация смещениями и задержкой
@@ -794,8 +792,6 @@ namespace Crimson.Model
                 Name = "Python Revolver",
                 MacroInfoForWeapon = new MacroInfo()
                 {
-                    Ammo = 6,
-                    SemiAutoDelay = 25,
                     CordsShifts = new CordsShift[4]
                     {
                         #region Инициализация смещениями и задержкой
@@ -815,25 +811,25 @@ namespace Crimson.Model
             #region Инициализация смещениями и задержкой
             for (int index = 0; index < 90; index += 3)
             {
-                m249Shifts[index] = new CordsShift(0, 8, 43);
+                m249Shifts[index]     = new CordsShift(0, 8, 43);
                 m249Shifts[index + 1] = new CordsShift(0, 7, 43);
                 m249Shifts[index + 2] = new CordsShift(0, 7, 43);
             }
             for (int index = 90; index < 150; index += 3)
             {
-                m249Shifts[index] = new CordsShift(0, 9, 43);
+                m249Shifts[index]     = new CordsShift(0, 9, 43);
                 m249Shifts[index + 1] = new CordsShift(0, 7, 43);
                 m249Shifts[index + 2] = new CordsShift(0, 7, 43);
             }
             for (int index = 150; index < 210; index += 3)
             {
-                m249Shifts[index] = new CordsShift(0, 8, 43);
+                m249Shifts[index]     = new CordsShift(0, 8, 43);
                 m249Shifts[index + 1] = new CordsShift(0, 7, 43);
                 m249Shifts[index + 2] = new CordsShift(0, 7, 43);
             }
             for (int index = 210; index < m249Shifts.Length; index += 3)
             {
-                m249Shifts[index] = new CordsShift(0, 9, 43);
+                m249Shifts[index]     = new CordsShift(0, 9, 43);
                 m249Shifts[index + 1] = new CordsShift(0, 7, 43);
                 m249Shifts[index + 2] = new CordsShift(0, 7, 43);
             }
@@ -854,8 +850,6 @@ namespace Crimson.Model
                 Name = "M39 Rifle",
                 MacroInfoForWeapon = new MacroInfo()
                 {
-                    Ammo = 20,
-                    SemiAutoDelay = 25,
                     CordsShifts = new CordsShift[5]
                     {
                         #region Инициализация смещениями и задержкой
@@ -875,8 +869,6 @@ namespace Crimson.Model
                 Name = "M92 Pistol",
                 MacroInfoForWeapon = new MacroInfo()
                 {
-                    Ammo = 15,
-                    SemiAutoDelay = 64,
                     CordsShifts = new CordsShift[4]
                     {
                         #region Инициализация смещениями и задержкой
@@ -895,8 +887,6 @@ namespace Crimson.Model
                 Name = "Revolver",
                 MacroInfoForWeapon = new MacroInfo()
                 {
-                    Ammo = 8,
-                    SemiAutoDelay = 64,
                     CordsShifts = new CordsShift[4]
                     {
                         #region Инициализация смещениями и задержкой
@@ -915,16 +905,14 @@ namespace Crimson.Model
                 Name = "Semi-Automatic Rifle",
                 MacroInfoForWeapon = new MacroInfo()
                 {
-                    Ammo = 16,
-                    SemiAutoDelay = 90,
                     CordsShifts = new CordsShift[4]
                     {
                         #region Инициализация смещениями и задержкой
                         // 0
                         new CordsShift(0, 0,  0),
-                        new CordsShift(0, 4, 12),
-                        new CordsShift(0, 4, 12),
-                        new CordsShift(0, 4, 12)
+                        new CordsShift(0, 6, 6),
+                        new CordsShift(0, 6, 6),
+                        new CordsShift(0, 6, 6)
                         #endregion
                     }
                 }
@@ -935,8 +923,6 @@ namespace Crimson.Model
                 Name = "Nailgun",
                 MacroInfoForWeapon = new MacroInfo()
                 {
-                    Ammo = 16,
-                    SemiAutoDelay = 64,
                     CordsShifts = new CordsShift[4]
                     {
                         #region Инициализация смещениями и задержкой

@@ -85,6 +85,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\GameDataService.cs" />
+    <Compile Include="Services\IDataService.cs" />
+    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\AddKeyBindingVM.cs" />
     <Compile Include="ViewModels\GameWindowVM.cs" />
     <Compile Include="ViewModels\KeyBindingsVM.cs" />
@@ -107,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalHook\UserActivityHook.cs" />
-    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\MacroManager.cs" />
     <Compile Include="Models\RustGame.cs" />
     <Compile Include="Models\RustWeapons.cs" />
@@ -178,6 +183,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\RustIcon_2.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Crimson.DataAccessLayer\Crimson.DataAccessLayer.csproj">
+      <Project>{D74B21BC-11C1-4120-BD21-5D41979512BA}</Project>
+      <Name>Crimson.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Crimson.Model\Crimson.Models.csproj">
+      <Project>{4605120C-DB05-46B1-8F27-38AAFBC14CB3}</Project>
+      <Name>Crimson.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

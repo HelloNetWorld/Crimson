@@ -16,29 +16,22 @@
 
 
     <DockPanel>
-        <Border DockPanel.Dock="Top"
-                BorderThickness="2"
-                BorderBrush="Crimson"
-                Margin="5">
-            <Button 
+        <Button DockPanel.Dock="Top"
                 Style="{StaticResource SquareButtonStyle}"
-                Margin="5"
+                Margin="-2,5"
                 Padding="5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Content="Установить клавишу включения/отключения работы макроса"
                 Foreground="Crimson"
-                Width="Auto" 
-                Height="Auto" 
+                Width="784" 
+                Height="40" 
                 BorderBrush="Crimson"
                 BorderThickness="2"
                 FontSize="14"
                 Command="{Binding SetActivasionKey}" 
                 Controls:ControlsHelper.ContentCharacterCasing="Normal"
                 />
-        </Border>
-
-
 
         <StatusBar DockPanel.Dock="Bottom"
                    Height="32"

@@ -62,8 +62,9 @@ namespace Crimson.ViewModels
                 RaisePropertyChanged(nameof(SelectedWeaponIndex));
             }
         }
-        public DelegateCommand ClearWeapon { get; }
-        public DelegateCommand SetHotKeys { get; }
+        public DelegateCommand ClearWeapon
+            => new DelegateCommand(() => { SelectedWeaponIndex = 0; });
+        // public DelegateCommand SetHotKeys { get; }
         public bool IsMacroEnabled
         {
             get => _isMacroEnabled;
@@ -92,8 +93,13 @@ namespace Crimson.ViewModels
                 });
             }
         }
-
+        public void MetroWindow_Closing()
+        {
+            _manager.PerformAllowByKey = false;
+            _manager.PerformEnable = false;
+        }
     }
+
     // Смотри WeaponVM в AddKeyBindingVM.cs.
     //public class WeaponVM
     //{

@@ -18,7 +18,7 @@ namespace Crimson.Model
     {
         private readonly UserActivityHook _actHook;
         private bool _leftButtonPressed = false;
-        private Keys hotKey = Keys.F12;
+        private Keys _hotKey = Keys.F12;
         private bool _performAllowByKey;
 
         public User User { get; } = new User();
@@ -109,10 +109,10 @@ namespace Crimson.Model
         /// </summary>
         public Keys HotKey
         {
-            get => hotKey;
+            get => _hotKey;
             set
             {
-                hotKey = value;
+                _hotKey = value;
                 RaisePropertyChanged(nameof(HotKey));
             }
         }

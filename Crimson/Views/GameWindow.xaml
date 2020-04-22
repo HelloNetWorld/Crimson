@@ -15,7 +15,14 @@
                       WindowStartupLocation="CenterScreen"
                       FontFamily="Candara"
                       >
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <ei:CallMethodAction 
+                TargetObject="{Binding}"
+                MethodName="MetroWindow_Closing"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid Margin="5">
 
         <Grid.ColumnDefinitions>
