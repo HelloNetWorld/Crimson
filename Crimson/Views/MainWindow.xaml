@@ -5,16 +5,12 @@
                       xmlns:viewmodel="clr-namespace:Crimson.ViewModels"
                       Title="Crimson"
                       Height="700"
-                      Width="800" 
+                      Width="800"
+                      DataContext="{Binding Source={StaticResource mainViewModelLocator},  Path=MainWindowVM}"
                       FontFamily="Candara"
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterScreen"
                       >
-    <Window.DataContext>
-        <viewmodel:MainWindowVM/>
-    </Window.DataContext>
-
-
     <DockPanel>
         <Button DockPanel.Dock="Top"
                 Style="{StaticResource SquareButtonStyle}"
@@ -29,7 +25,7 @@
                 BorderBrush="Crimson"
                 BorderThickness="2"
                 FontSize="14"
-                Command="{Binding SetActivasionKey}" 
+                Command="{Binding EditKeyBindingCommand}" 
                 Controls:ControlsHelper.ContentCharacterCasing="Normal"
                 />
 
@@ -38,7 +34,7 @@
                    Style="{StaticResource MetroStatusBar}">
             <StatusBarItem Margin="5">
                 <TextBlock Name="lblCurrentActivationButton" 
-                           Text="{Binding StringFormat=Текущая кнопка включения/отключения: {0}, Path=ActivasionKey}"
+                           Text="{Binding StringFormat=Текущая кнопка включения/отключения: {0}, Path=KeyBinding}"
                            Foreground="White"
                            >
 
@@ -60,9 +56,9 @@
             </StackPanel>
         </Border>-->
         <ItemsControl Margin="5"
-                 ItemsSource="{Binding UserGames}" 
-                 Width="782"
-                 >
+                      ItemsSource="{Binding Games}" 
+                      Width="782"
+                      >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4"
@@ -72,7 +68,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding OpenGameWindow}"
+                    <Button Command="{Binding GameDetailCommand}"
                             Style="{StaticResource SquareButtonStyle}"
                             BorderThickness="0">
                         <Grid 

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Crimson.Models
 {
-    public class Macro
+    public enum InstructionType
     {
-        public string Name { get; set; }
-        public List<IInstruction> Instructions { get; set; }
+        MouseShiftInstruction,
+        DelayInstruction,
+        ButtonInstruction,
     }
 }

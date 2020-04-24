@@ -8,16 +8,9 @@ using System.Windows.Input;
 namespace Crimson.Models
 {
     /// <summary>
-    /// Инстукция.
-    /// Бывает разных видов (например, сдвиг указателя мышки, задержка, нажатие клавиши клавитуры).
-    /// </summary>
-    public class Instruction
-    {
-    }
-    /// <summary>
     /// Сдвиг указателя мышки относительно текущего положения на экране.
     /// </summary>
-    public class MouseShiftInstruction : Instruction
+    public class MouseShiftInstruction : IInstruction
     {
         /// <summary>
         /// Инициализирует новый экземпляр MouseShiftInstruction-класс с нулевыми значениями.
@@ -44,11 +37,13 @@ namespace Crimson.Models
         /// Смещение по оси Y в px.
         /// </summary>
         public int DY { get; set; }
+
+        public InstructionType Type => InstructionType.MouseShiftInstruction;
     }
     /// <summary>
     /// Задержка.
     /// </summary>
-    public class DelayInstruction : Instruction
+    public class DelayInstruction : IInstruction
     {
         /// <summary>
         /// Инициализирует новый экземпляр DelayInstruction-класс с нулевыми значениями.
@@ -70,11 +65,13 @@ namespace Crimson.Models
         /// Задержка в мс.
         /// </summary>
         public int Delay { get; set; }
+
+        public InstructionType Type => InstructionType.DelayInstruction;
     }
     /// <summary>
     /// Нажатие на клавишу клавиатуры.
     /// </summary>
-    public class ButtonInstruction : Instruction
+    public class ButtonInstruction : IInstruction
     {
         /// <summary>
         /// Инициализирует новый экземпляр ButtonInstruction-класс с нулевым keyCode.
@@ -94,5 +91,7 @@ namespace Crimson.Models
         /// Код кнопки которую необходимо нажать.
         /// </summary>
         public int KeyCode { get; set; }
+
+        public InstructionType Type => InstructionType.ButtonInstruction;
     }
 }

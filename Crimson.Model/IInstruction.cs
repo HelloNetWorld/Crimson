@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Crimson.Models
 {
-    public class Macro
+    /// <summary>
+    /// Инстукция.
+    /// </summary>
+    public interface IInstruction
     {
-        public string Name { get; set; }
-        public List<IInstruction> Instructions { get; set; }
+        InstructionType Type { get; }
     }
 }

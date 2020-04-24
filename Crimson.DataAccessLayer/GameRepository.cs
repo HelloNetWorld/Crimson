@@ -71,8 +71,8 @@ namespace Crimson.DataAccessLayer
                         new Macro()
                         {
                             #region AK Assault Rifle Initialization
-                             Name = "AK Assault Rifle",
-                             Instructions = new List<Instruction>()
+                            Name = "AK Assault Rifle",
+                            Instructions = new List<IInstruction>()
                              {
 								 // 0
 								 new MouseShiftInstruction(0, 0),
@@ -383,13 +383,13 @@ namespace Crimson.DataAccessLayer
                                  new DelayInstruction(27),
 								 //146       
                              }
-                        #endregion
+                            #endregion
                         },
                         new Macro()
                         {
                             #region Tomphson Initialization
                             Name = "Tomphson",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 // 0                              
                                 new MouseShiftInstruction(0, 0),
@@ -601,7 +601,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region Custom SMG Initialaization
                             Name = "Custom SMG",
-                             Instructions = new List<Instruction>()
+                             Instructions = new List<IInstruction>()
                              {
                                  // 0                              
                                  new MouseShiftInstruction(0, 0),
@@ -758,7 +758,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region LR-300 Assault Rifle Initialization
                             Name = "LR300 Assault Rifle",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 // 0                              
                                 new MouseShiftInstruction(0, 0),
@@ -1089,7 +1089,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region MP5A4 Initialization
                             Name = "MP5A4",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 // 0
                                 new MouseShiftInstruction(0, 0),
@@ -1406,7 +1406,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region P250 Initialization
                             Name = "P250 Semi-automatic pistol",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 new MouseShiftInstruction(0, 7),
                                 new DelayInstruction(23),
@@ -1421,7 +1421,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region Python Initialization
                             Name = "Python Revolver",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 new MouseShiftInstruction(0, 12),
                                 new DelayInstruction(25),
@@ -1436,7 +1436,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region M249 machine gun Initialization
                             Name = "M249 machine gun",
-                            Instructions = new List<Instruction>(300)
+                            Instructions = new List<IInstruction>(300)
                             // Initialization далее в коде.
                             /*
                             {
@@ -2079,7 +2079,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region M39 Rifle Initialization
                             Name = "M39 Rifle",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 new MouseShiftInstruction(0, 2),
                                 new DelayInstruction(12),
@@ -2098,7 +2098,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region M92 Pistol initialization
                             Name = "M92 Pistol",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 new MouseShiftInstruction(0, 7),
                                 new DelayInstruction(30),
@@ -2113,7 +2113,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region Revolver Initialization
                             Name = "Revolver",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 new MouseShiftInstruction(0, 4),
                                 new DelayInstruction(28),
@@ -2128,7 +2128,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region Semi-Automatic Rifle Initialization
                             Name = "Semi-Automatic Rifle",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 new MouseShiftInstruction(6, 6),
                                 new DelayInstruction(6),
@@ -2143,7 +2143,7 @@ namespace Crimson.DataAccessLayer
                         {
                             #region Nailgun Initialization
                             Name = "Nailgun",
-                            Instructions = new List<Instruction>()
+                            Instructions = new List<IInstruction>()
                             {
                                 new MouseShiftInstruction(0, 5),
                                 new DelayInstruction(22),
@@ -2157,7 +2157,7 @@ namespace Crimson.DataAccessLayer
                         new Macro()
                         {
                             Name = "M249 With x8 scope",
-                            Instructions = new List<Instruction>(300),
+                            Instructions = new List<IInstruction>(300),
                         }
                     }
                 }

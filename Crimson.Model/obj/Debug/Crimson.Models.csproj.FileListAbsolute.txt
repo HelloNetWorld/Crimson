@@ -1,6 +1,5 @@
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\bin\Debug\Crimson.Models.dll
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\bin\Debug\Crimson.Models.pdb
-C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Debug\Crimson.Models.csprojAssemblyReference.cache
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Debug\Crimson.Models.csproj.CoreCompileInputs.cache
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Debug\Crimson.Models.dll
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Debug\Crimson.Models.pdb

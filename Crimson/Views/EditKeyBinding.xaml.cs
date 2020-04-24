@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace Crimson.Views
 {
     /// <summary>
-    /// Логика взаимодействия для KeyBindings.xaml
+    /// Логика взаимодействия для AddKeyBinding.xaml
     /// </summary>
-    public partial class KeyBindings : MetroWindow
+    public partial class EditKeyBinding : MetroWindow
     {
-        public KeyBindings()
+        public EditKeyBinding()
         {
             InitializeComponent();
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            tbCurrentKey.Focus();
         }
     }
 }

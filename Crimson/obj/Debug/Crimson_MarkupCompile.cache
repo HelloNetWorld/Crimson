@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Виктор\source\repos\Crimson\Crimson\App.xaml
-6-1688396351
+4-276289799
 
-25-1735335009
+191445690982
 25-596381047
-Resources\Icons\Icons.xaml;Views\AddKeyBinding.xaml;Views\GameWindow.xaml;Views\KeyBindings.xaml;Views\MainWindow.xaml;Views\WeaponControl.xaml;
+Resources\Icons\Icons.xaml;Views\EditKeyBinding.xaml;Views\GameWindow.xaml;Views\MainWindow.xaml;
 
 False
 

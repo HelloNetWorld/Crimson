@@ -9,11 +9,12 @@
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
                       xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                       mc:Ignorable="d"
-                      Title="RUST - выберите оружие" 
+                      Title="RUST - выбор макроса" 
                       Height="220" Width="420" 
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterScreen"
                       FontFamily="Candara"
+                      DataContext="{Binding Source={StaticResource mainViewModelLocator},  Path=GameWindowVM}"
                       >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
@@ -42,7 +43,7 @@
                         Margin="5"
                         >
 
-            <Label Content="Оружие:"
+            <Label Content="Макрос:"
                        Foreground="Crimson"
                        Style="{StaticResource MetroLabel}"
                        FontSize="14"
@@ -50,9 +51,9 @@
                        />
 
             <ComboBox Style="{StaticResource MetroComboBox}"
-                      ItemsSource="{Binding Weapons}"
+                      ItemsSource="{Binding Macros}"
                       DisplayMemberPath="Name"
-                      SelectedIndex="{Binding SelectedWeaponIndex}"
+                      SelectedIndex="{Binding SelectedMacroIndex}"
                       Width="150"
                       Foreground="Crimson"
                       BorderBrush="Crimson"
@@ -62,12 +63,11 @@
 
         </StackPanel>
 
-
         <StackPanel Orientation="Horizontal"
                     Grid.Column="1">
             <Button Margin="5,5,5,5"
                     Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding ClearWeapon}"
+                    Command="{Binding ClearMacros}"
                     Content="Очистить"
                     Foreground="Crimson" 
                     FontSize="14"

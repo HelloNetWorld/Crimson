@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Crimson.Services
 {
-    interface IDataService
+    public interface IDataService
     {
         void DeleteGameAt(int index);
         IEnumerable<Game> GetAllGames();

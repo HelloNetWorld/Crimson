@@ -1,87 +1,195 @@
-﻿using Crimson.Model;
+﻿using Crimson.Models;
 using Crimson.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Crimson.Services;
+using System;
+using Crimson.DataAccessLayer;
+using Crimson.Extensions;
+using Crimson.Utility;
 
 namespace Crimson.ViewModels
 {
     public class MainWindowVM : BindableBase
     {
-        private User _user;
-        private MacroManager _manager = new MacroManager();
-        public MainWindowVM()
+        #region Private variables
+        private readonly IDataService _gameDataService;
+        private readonly PerformService _performer;
+        private readonly IDialogService _dialogService;
+        private ObservableCollection<GameVM> _games;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes an instance of <see cref="MainWindowVM"/>.
+        /// </summary>
+        /// <param name="dataService"></param>
+        /// <param name="performer"></param>
+        /// <param name="dialogService"></param>
+        public MainWindowVM(IDataService dataService, PerformService performer, IDialogService dialogService)
         {
-            _user = _manager.User;
-            _user.PropertyChanged += (s, o) => { RaisePropertyChanged(nameof(ActivasionKey)); };
-            _user.PropertyChanged += (s, o) => { RaisePropertyChanged(nameof(UserGames)); };
+            if (dataService == null) throw new ArgumentNullException(nameof(dataService));
+            if (performer == null) throw new ArgumentNullException(nameof(performer));
+            if (dialogService == null) throw new ArgumentNullException(nameof(dialogService));
 
-            _manager.PropertyChanged += (s, o) => { RaisePropertyChanged(nameof(ActivasionKey)); };
+            _gameDataService = dataService;
+            _performer = performer;
+            _dialogService = dialogService;
 
-            UserGames = new ObservableCollection<GameVM>(_user.Games.Select(game => new GameVM(game,_manager)));
+            LoadData();
+
+            LoadCommands();
         }
-        public DelegateCommand SetActivasionKey 
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Загружает команды.
+        /// </summary>
+        private void LoadCommands()
         {
-            get
+            EditKeyBindingCommand = new DelegateCommand(EditKeyBinding);
+        }
+
+        /// <summary>
+        /// Открывает редактор KeyBinding.
+        /// </summary>
+        private void EditKeyBinding()
+        {
+            _dialogService.ShowEditKeyDialog();
+        }
+
+        /// <summary>
+        /// Загружает данные.
+        /// </summary>
+        private void LoadData()
+        {
+            Games = _gameDataService
+                .GetAllGames()
+                .Select(g => new GameVM(g, _dialogService))
+                .ToObservableCollection<GameVM>();
+        }
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Получает или задаёт команду редактирования KeyBinding.
+        /// </summary>
+        public DelegateCommand EditKeyBindingCommand { get; set; }
+
+        /// <summary>
+        /// Получает строку соответсвующему текущему Hotkey у объекта PerformService.
+        /// </summary>
+        public string KeyBinding => _performer.HotKey.ToString();
+
+        /// <summary>
+        /// Получает или задаёт List of games.
+        /// </summary>
+        public ObservableCollection<GameVM> Games
+        {
+            get => _games;
+            set
             {
-                return new DelegateCommand(() =>
-                {
-                    
-                    var w = new AddKeyBinding();
-                    var vm = new AddKeyBindingVM()
-                    {
-                        Manager = _manager,
-                        ActivasionKey = _manager.HotKey.ToString()
-                    };
-                    w.DataContext = vm;
-                    w.ShowDialog();
-                });
+                _games = value;
+                RaisePropertyChanged(nameof(Games));
             }
         }
-        public string ActivasionKey => _manager.HotKey.ToString();
-        public ObservableCollection<GameVM> UserGames { get; }
+        #endregion
     }
+
     public class GameVM : BindableBase
     {
-        private readonly MacroManager _manager;
-        private readonly Game _game;
-        public GameVM(Game game, MacroManager manager = null)
+        #region Private variables
+        private readonly IDialogService _dialogService;
+        private Game _game;
+        private string _icon;
+        private string _name;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes an instance of <see cref="GameVM"/>.
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="dialogService"></param>
+        public GameVM(Game game, IDialogService dialogService)
         {
-            // В случае добавления механизма редактирования скриптов,
-            // нужно будет сделать подписку на коллекцию Games в Модели.
-            if( game != null)
-            { 
-                Icon = game.IconPath;
-                Name = game.Name;
-            }
+            if (dialogService == null) throw new ArgumentNullException(nameof(dialogService));
+            if (game == null) throw new ArgumentNullException(nameof(game));
 
-            if (manager != null)
-                _manager = manager;
+            _dialogService = dialogService;
+            _game = game;
 
-            if (game != null)
-                _game = game;
+            LoadData();
+            LoadCommands();
         }
-        public string Icon { get; }
-        public string Name { get; }
-        public DelegateCommand OpenGameWindow
+        #endregion
+
+        #region Private Methods
+        /// <summary>
+        /// Загржует данные.
+        /// </summary>
+        private void LoadData()
         {
-            get
+            Icon = _game.IconPath;
+            Name = _game.Name;
+        }
+
+        /// <summary>
+        /// Загржует команды.
+        /// </summary>
+        private void LoadCommands()
+        {
+            GameDetailCommand = new DelegateCommand(GameDetail);
+        }
+
+        /// <summary>
+        /// Посылает сообщение Game и открывает окно с этим объектом.
+        /// </summary>
+        private void GameDetail()
+        {
+            Messenger.Default.Send<Game>(_game);
+
+            _dialogService.ShowGameDialog();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Задаёт или получает пусть к иконке Game.
+        /// </summary>
+        public string Icon 
+        { 
+            get => _icon;
+            set
             {
-                return new DelegateCommand(() =>
-                {
-
-                    var w = new GameWindow();
-                    var vm = new GameWindowVM(_game, _manager)
-                    {
-                        IsMacroEnabled = _manager.PerformAllowByKey,
-                    };
-
-                    w.DataContext = vm;
-                    w.ShowDialog();
-                });
+                _icon = value;
+                RaisePropertyChanged(nameof(Icon));
             }
         }
+
+        /// <summary>
+        /// Задаёт или получает назание Game.
+        /// </summary>
+        public string Name 
+        { 
+            get => _name;
+            set
+            {
+                _name = value;
+                RaisePropertyChanged(nameof(Name));
+            }
+        }
+
+        /// <summary>
+        /// Задаёт или получает команду GameDetailCommand.
+        /// </summary>
+        public DelegateCommand GameDetailCommand { get; set; }
+        #endregion
     }
 }

@@ -11,7 +11,8 @@ namespace Crimson.Services
     public class DialogService : IDialogService
     {
         // Window coffeeDetailView = null;
-        private Window _addKeyBindingWindow;
+        private Window _editKeyBindingWindow;
+        private Window _gameDetail;
 
         public DialogService()
         {
@@ -20,13 +21,24 @@ namespace Crimson.Services
 
         public void ShowGameDialog()
         {
-            _addKeyBindingWindow = new AddKeyBinding();
-            _addKeyBindingWindow.ShowDialog();
+            _gameDetail = new GameWindow();
+            _gameDetail.ShowDialog();
         }
 
         public void CloseGameDialog()
         {
-            _addKeyBindingWindow?.Close();
+            _gameDetail.Close();
+        }
+
+        public void ShowEditKeyDialog()
+        {
+            _editKeyBindingWindow = new EditKeyBinding();
+            _editKeyBindingWindow.ShowDialog();
+        }
+
+        public void CloseEditKeyDialog()
+        {
+            _editKeyBindingWindow?.Close();
         }
     }
 }

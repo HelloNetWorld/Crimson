@@ -1,4 +1,4 @@
-﻿using Crimson.Model;
+﻿using Crimson.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.ComponentModel;
@@ -8,63 +8,147 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crimson.Services;
+using Crimson.Utility;
+using Crimson.Extensions;
 
 namespace Crimson.ViewModels
 {
     public class GameWindowVM : BindableBase
     {
-        private readonly Game _game;
-        private int _selectedWeaponIndex;
+        #region Private variables
+        private readonly PerformService _performer;
+        private readonly IDialogService _dialogService;
+        private Game _game;
+        private int _selectedMacroIndex;
         private bool _isMacroEnabled;
-        private readonly MacroManager _manager;
+        private ObservableCollection<Macro> macros;
+        #endregion
 
-        public GameWindowVM(Game game, MacroManager manager)
+        #region Constructor
+        /// <summary>
+        /// Initializes an instance of <see cref="GameWindowVM"/>.
+        /// </summary>
+        /// <param name="performer"></param>
+        /// <param name="dialogService"></param>
+        public GameWindowVM(PerformService performer, IDialogService dialogService)
+        {
+            if (performer == null) throw new ArgumentNullException(nameof(performer));
+            if (dialogService == null) throw new ArgumentNullException(nameof(dialogService));
+
+            _performer = performer;
+            _dialogService = dialogService;
+
+            Messenger.Default.Register<Game>(this, OnGameReceived);
+
+            _performer.PropertyChanged += Performer_PropertyChanged;
+        }
+        #endregion
+
+        #region Private Methods
+        /// <summary>
+        /// Загружает команды.
+        /// </summary>
+        private void LoadCommands()
+        {
+            ActivateMacros = new DelegateCommand<object>((obj) =>
+            {
+                bool isChecked = (bool)obj;
+                if (!isChecked)
+                {
+                    _performer.PerformAllowByKey = false;
+                }
+                else
+                {
+                    _performer.PerformAllowByKey = true;
+                    LoadMacrosAt(SelectedMacroIndex);
+                }
+            });
+
+            ClearMacros = new DelegateCommand(() => { SelectedMacroIndex = 0; });
+        }
+
+        /// <summary>
+        /// Загружает макросы.
+        /// </summary>
+        private void LoadData()
+        {
+            Macros = _game.Macros.ToObservableCollection();
+        }
+
+        /// <summary>
+        /// Срабатывает когда было передано соответсвющее собщение(<see cref="Messenger.Send{T}(T)"/>).
+        /// </summary>
+        /// <param name="game"></param>
+        private void OnGameReceived(Game game)
         {
             if (game == null) throw new ArgumentNullException(nameof(game));
-            if (manager == null) throw new ArgumentNullException(nameof(manager));
 
+            _performer.PerformEnable = true;
             _game = game;
-            _manager = manager;
-            _manager.PerformEnable = true;
-            LoadSelectedMacros();
 
-            _game.PropertyChanged += Game_PropertyChanged;
-            _manager.PropertyChanged += Manager_PropertyChanged;
+            LoadData();
+            LoadCommands();
 
-            Weapons = new ObservableCollection<WeaponVM>(game.Macros.Select(w => new WeaponVM(w)));
-
+            SelectedMacroIndex = 0;
         }
 
-        private void Manager_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            IsMacroEnabled = _manager.PerformAllowByKey;
-        }
+        /// <summary>
+        /// Срабатывает когда изменилось свойство у PerformService.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Performer_PropertyChanged(object sender, PropertyChangedEventArgs e) =>
+            IsMacroEnabled = _performer.PerformAllowByKey;
 
-        private void LoadSelectedMacros()
+        /// <summary>
+        /// Загружает соответсвующий макрос по индексу в List<Macro>.
+        /// </summary>
+        /// <param name="index"></param>
+        private void LoadMacrosAt(int index)
         {
-            _manager.MacroInfo = _game?
+            if (index < 0 && index >= _game.Macros.Count)
+                throw new IndexOutOfRangeException(nameof(index));
+
+            _performer.Macro = _game?
                 .Macros?
-                .ElementAt(SelectedWeaponIndex)?
-                .MacroInfoForWeapon;
+                .ElementAt(index);
         }
+        #endregion
 
-        private void Game_PropertyChanged(object sender, PropertyChangedEventArgs e) =>
-            RaisePropertyChanged(nameof(Weapons));
+        #region Public properties
+        /// <summary>
+        /// Задаёт или получает коллекцию макросов.
+        /// </summary>
+        public ObservableCollection<Macro> Macros 
+        { 
+            get => macros;
 
-        public ObservableCollection<WeaponVM> Weapons { get; set; }
-        public int SelectedWeaponIndex
-        {
-            get => _selectedWeaponIndex;
             set
             {
-                _selectedWeaponIndex = value;
-                LoadSelectedMacros();
-                RaisePropertyChanged(nameof(SelectedWeaponIndex));
+                macros = value;
+                RaisePropertyChanged(nameof(Macros));
             }
         }
-        public DelegateCommand ClearWeapon
-            => new DelegateCommand(() => { SelectedWeaponIndex = 0; });
-        // public DelegateCommand SetHotKeys { get; }
+
+        /// <summary>
+        /// Задаёт или получает индекс выбранного макроса.
+        /// </summary>
+        public int SelectedMacroIndex
+        {
+            get => _selectedMacroIndex;
+            set
+            {
+                _selectedMacroIndex = value;
+                LoadMacrosAt(_selectedMacroIndex);
+                RaisePropertyChanged(nameof(SelectedMacroIndex));
+            }
+        }
+
+        /// <summary>
+        /// Устанавливает или получает флаг включённого/отключённного 
+        /// состояния макроса <see cref="PerformService.PerformAllowByKey" />.
+        /// </summary>
         public bool IsMacroEnabled
         {
             get => _isMacroEnabled;
@@ -74,35 +158,27 @@ namespace Crimson.ViewModels
                 RaisePropertyChanged(nameof(IsMacroEnabled));
             }
         }
-        public DelegateCommand<object> ActivateMacros
-        {
-            get
-            {
-                return new DelegateCommand<object>((obj) =>
-                {
-                    bool isChecked = (bool)obj;
-                    if (!isChecked)
-                    {
-                        _manager.PerformAllowByKey = false;
-                    }
-                    else
-                    {
-                        _manager.PerformAllowByKey = true;
-                        LoadSelectedMacros();
-                    }
-                });
-            }
-        }
+
+        /// <summary>
+        /// Задаёт или получает команду сброса выбранного макроса.
+        /// </summary>
+        public DelegateCommand ClearMacros { get; set; }
+
+        /// <summary>
+        /// Задаёт или получает команду включения макроса.
+        /// </summary>
+        public DelegateCommand<object> ActivateMacros { get; set; }
+        #endregion
+
+        #region Public Methods
+        /// <summary>
+        /// Обработчик срабатывает во время закрытия окна.
+        /// </summary>
         public void MetroWindow_Closing()
         {
-            _manager.PerformAllowByKey = false;
-            _manager.PerformEnable = false;
+            _performer.PerformAllowByKey = false;
+            _performer.PerformEnable = false;
         }
+        #endregion
     }
-
-    // Смотри WeaponVM в AddKeyBindingVM.cs.
-    //public class WeaponVM
-    //{
-    //    public string Name { get; }
-    //}
 }

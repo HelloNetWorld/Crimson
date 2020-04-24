@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game.cs" />
-    <Compile Include="Instruction.cs" />
+    <Compile Include="IInstruction.cs" />
+    <Compile Include="InstructionEnum.cs" />
+    <Compile Include="Instructions.cs" />
     <Compile Include="Macro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

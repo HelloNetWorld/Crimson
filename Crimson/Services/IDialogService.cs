@@ -10,5 +10,7 @@ namespace Crimson.Services
     {
         void CloseGameDialog();
         void ShowGameDialog();
+        void ShowEditKeyDialog();
+        void CloseEditKeyDialog();
     }
 }

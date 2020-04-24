@@ -50,7 +50,7 @@ namespace Crimson.Views {
     /// <summary>
     /// AddKeyBinding
     /// </summary>
-    public partial class AddKeyBinding : MahApps.Metro.Controls.MetroWindow, System.Windows.Markup.IComponentConnector {
+    public partial class EditKeyBinding : MahApps.Metro.Controls.MetroWindow, System.Windows.Markup.IComponentConnector {
         
         
         #line 39 "..\..\..\Views\AddKeyBinding.xaml"
@@ -93,7 +93,7 @@ namespace Crimson.Views {
             case 1:
             
             #line 17 "..\..\..\Views\AddKeyBinding.xaml"
-            ((Crimson.Views.AddKeyBinding)(target)).Loaded += new System.Windows.RoutedEventHandler(this.MetroWindow_Loaded);
+            ((Crimson.Views.EditKeyBinding)(target)).Loaded += new System.Windows.RoutedEventHandler(this.MetroWindow_Loaded);
             
             #line default
             #line hidden
