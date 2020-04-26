@@ -5,6 +5,7 @@ using Prism.Mvvm;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Configuration;
 using Crimson.Services;
 using System;
 using Crimson.DataAccessLayer;
@@ -20,6 +21,7 @@ namespace Crimson.ViewModels
         private readonly PerformService _performer;
         private readonly IDialogService _dialogService;
         private ObservableCollection<GameVM> _games;
+        private string keyBinding;
         #endregion
 
         #region Constructor
@@ -39,13 +41,27 @@ namespace Crimson.ViewModels
             _performer = performer;
             _dialogService = dialogService;
 
+            _performer.PropertyChanged += _performer_PropertyChanged;
+
             LoadData();
 
             LoadCommands();
         }
+
+
         #endregion
 
         #region Private Methods
+        /// <summary>
+        /// Срабатывает в случе когда меняется свойство PerformService.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _performer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
+            KeyBinding = _performer.HotKey.ToString();
+        }
 
         /// <summary>
         /// Загружает команды.
@@ -72,8 +88,20 @@ namespace Crimson.ViewModels
                 .GetAllGames()
                 .Select(g => new GameVM(g, _dialogService))
                 .ToObservableCollection<GameVM>();
+
+            KeyBinding = _performer.HotKey.ToString();
         }
         #endregion
+
+        //#region Public Methods
+        ///// <summary>
+        ///// Обработчик срабатывает во время закрытия окна.
+        ///// </summary>
+        //public void MetroWindow_Closing()
+        //{
+        //    Properties.Settings.Default.Save();
+        //}
+        //#endregion
 
         #region Public Properties
 
@@ -85,7 +113,15 @@ namespace Crimson.ViewModels
         /// <summary>
         /// Получает строку соответсвующему текущему Hotkey у объекта PerformService.
         /// </summary>
-        public string KeyBinding => _performer.HotKey.ToString();
+        public string KeyBinding 
+        { 
+            get => keyBinding;
+            set
+            {
+                keyBinding = value;
+                RaisePropertyChanged(nameof(KeyBinding));
+            }
+        }
 
         /// <summary>
         /// Получает или задаёт List of games.

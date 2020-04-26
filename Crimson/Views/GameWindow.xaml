@@ -16,6 +16,7 @@
                       FontFamily="Candara"
                       DataContext="{Binding Source={StaticResource mainViewModelLocator},  Path=GameWindowVM}"
                       >
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <ei:CallMethodAction 

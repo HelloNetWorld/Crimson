@@ -3,5 +3,12 @@
   <Profiles>
     <Profile Name="(Default)" />
   </Profiles>
+  <applicationSettings>
+    <Crimson.Properties.Settings>
+      <setting name="HotKey" serializeAs="String">
+        <value>F12</value>
+      </setting>
+    </Crimson.Properties.Settings>
+  </applicationSettings>
   <Settings />
 </SettingsFile>

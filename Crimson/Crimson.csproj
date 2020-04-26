@@ -203,5 +203,11 @@
       <Name>Crimson.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utility\Messages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PubgIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

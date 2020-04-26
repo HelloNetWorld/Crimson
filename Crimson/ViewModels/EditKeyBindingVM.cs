@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Configuration;
 
 namespace Crimson.ViewModels
 {
@@ -17,6 +18,7 @@ namespace Crimson.ViewModels
         #region Private variables
         private readonly PerformService _performer;
         private string keyBinding;
+        private readonly KeysConverter _keysConverter = new KeysConverter();
         #endregion
 
         #region Constructor
@@ -30,6 +32,8 @@ namespace Crimson.ViewModels
 
             _performer = performService;
             _performer.PerformEnable = false;
+
+            _performer.HotKey = (Keys) _keysConverter.ConvertFromString(Properties.Settings.Default["HotKey"].ToString());
 
             KeyBinding = _performer.HotKey.ToString();
         }
@@ -66,6 +70,10 @@ namespace Crimson.ViewModels
 
             // KeyInterop for converting 'System.Windows.Input.Key' to 'System.Windows.Forms.Keys'.
             _performer.HotKey = (Keys)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            // Saving to settings.
+            Properties.Settings.Default["HotKey"] = (object)_performer.HotKey;
+            Properties.Settings.Default.Save();
         }
         #endregion
     }

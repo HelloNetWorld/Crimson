@@ -3,6 +3,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:viewmodel="clr-namespace:Crimson.ViewModels"
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+                      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                       Title="Crimson"
                       Height="700"
                       Width="800"
@@ -11,6 +13,15 @@
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterScreen"
                       >
+    
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <ei:CallMethodAction 
+                TargetObject="{Binding}"
+                MethodName="MetroWindow_Closing"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+    
     <DockPanel>
         <Button DockPanel.Dock="Top"
                 Style="{StaticResource SquareButtonStyle}"
