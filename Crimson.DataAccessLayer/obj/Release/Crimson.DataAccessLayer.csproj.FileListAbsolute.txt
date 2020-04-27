@@ -1,0 +1,9 @@
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\bin\Release\Crimson.DataAccessLayer.dll
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\bin\Release\Crimson.DataAccessLayer.pdb
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\bin\Release\Crimson.Models.dll
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\bin\Release\Crimson.Models.pdb
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\obj\Release\Crimson.DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\obj\Release\Crimson.DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\obj\Release\Crimson.DataAccessLayer.csproj.CopyComplete
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\obj\Release\Crimson.DataAccessLayer.dll
+C:\Users\Виктор\source\repos\Crimson\Crimson.DataAccessLayer\obj\Release\Crimson.DataAccessLayer.pdb
