@@ -19,6 +19,7 @@ namespace Crimson.Models
         {
 
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр MouseShiftInstruction-класс со смещением по X и Y.
         /// </summary>
@@ -29,10 +30,12 @@ namespace Crimson.Models
             DX = dx;
             DY = dy;
         }
+
         /// <summary>
         /// Смещение по оси Х в px.
         /// </summary>
         public int DX { get; set; }
+
         /// <summary>
         /// Смещение по оси Y в px.
         /// </summary>
@@ -52,6 +55,7 @@ namespace Crimson.Models
         {
 
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр DelayInstruction-класс выдержкой времени в мс.
         /// </summary>
@@ -61,6 +65,7 @@ namespace Crimson.Models
             if (delay < 0) throw new ArgumentOutOfRangeException(nameof(Delay));
             Delay = delay;
         }
+
         /// <summary>
         /// Задержка в мс.
         /// </summary>
@@ -80,6 +85,7 @@ namespace Crimson.Models
         {
 
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр ButtonInstruction-класс с кодом кнопки.
         /// </summary>
@@ -87,6 +93,7 @@ namespace Crimson.Models
         {
             KeyCode = keyCode;
         }
+
         /// <summary>
         /// Код кнопки которую необходимо нажать.
         /// </summary>

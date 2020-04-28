@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Crimson.Services;
 using Crimson.Utility;
 using Crimson.Extensions;
+using System.Windows;
 
 namespace Crimson.ViewModels
 {
@@ -22,7 +23,11 @@ namespace Crimson.ViewModels
         private Game _game;
         private int _selectedMacroIndex;
         private bool _isMacroEnabled;
-        private ObservableCollection<Macro> macros;
+        private ObservableCollection<Macro> _macros;
+        private ObservableCollection<Scope> _scopes;
+        private int _selectedScopeIndex;
+        private bool _autoChecked;
+
         #endregion
 
         #region Constructor
@@ -69,11 +74,15 @@ namespace Crimson.ViewModels
         }
 
         /// <summary>
-        /// Загружает макросы.
+        /// Загружает данные.
         /// </summary>
         private void LoadData()
         {
-            Macros = _game.Macros.ToObservableCollection();
+            if (_game != null)
+            {
+                Macros = _game.Macros.ToObservableCollection();
+                SelectedMacroIndex = 0;
+            }
         }
 
         /// <summary>
@@ -89,8 +98,6 @@ namespace Crimson.ViewModels
 
             LoadData();
             LoadCommands();
-
-            SelectedMacroIndex = 0;
         }
 
         /// <summary>
@@ -107,26 +114,130 @@ namespace Crimson.ViewModels
         /// <param name="index"></param>
         private void LoadMacrosAt(int index)
         {
-            if (index < 0 && index >= _game.Macros.Count)
-                throw new IndexOutOfRangeException(nameof(index));
+            if (_macros != null && _game != null)
+            {
+                if (index < 0 && index >= _game.Macros.Count)
+                    throw new IndexOutOfRangeException(nameof(index));
 
-            _performer.Macro = _game?
-                .Macros?
-                .ElementAt(index);
+                _performer.Macro = _game
+                    .Macros
+                    .ElementAt(index);
+            }
+        }
+
+        /// <summary>
+        /// Загружает соответсвующий макрос по индексу в List<Macro>.
+        /// </summary>
+        /// <param name="index"></param>
+        private void LoadScopeAt(int index)
+        {
+            if (_scopes != null)
+            {
+                if (index < 0 && index >= _scopes.Count)
+                    throw new IndexOutOfRangeException(nameof(index));
+
+                _performer.MultiplyerY = _scopes.ElementAt(index).Multiplier;
+            }
+        }
+
+        /// <summary>
+        /// Загружает коллекцию Scopes для выбранного индекса макроса из массва Macros.
+        /// </summary>
+        /// <param name="index">Индекс в массиве макросов.(_macros)</param>
+        private void LoadScopesFor(int index)
+        {
+            if (_macros != null && _game != null)
+            {
+                if (index < 0 && index >= _game.Macros.Count)
+                    throw new IndexOutOfRangeException(nameof(index));
+
+                Scopes = _macros.ElementAt(index).Scopes?.ToObservableCollection();
+
+                if (_scopes != null)
+                    SelectedScopeIndex = 0;
+            }
         }
         #endregion
 
         #region Public properties
         /// <summary>
-        /// Задаёт или получает коллекцию макросов.
+        /// Задаёт и получает видимость элементов управления связанных с прицелами (Scopes).
         /// </summary>
-        public ObservableCollection<Macro> Macros 
-        { 
-            get => macros;
+        public Visibility ScopeVisibility
+            => _game.Macros.ElementAt(SelectedMacroIndex).Scopes == null ?
+            Visibility.Hidden : Visibility.Visible;
 
+        /// <summary>
+        /// Задаёт и получает видимость элементов управления связанных режимами стрельбы.
+        /// </summary>
+        public Visibility ShootingModeVisibility
+            => _game.Macros.ElementAt(SelectedMacroIndex).InstructionsSingleFire == null ?
+            Visibility.Hidden : Visibility.Visible;
+
+        /// <summary>
+        /// Получает первую вставку текста в textBlock (Инструкция к настройкам игры).
+        /// </summary>
+        public string FirstComment => _game.Commentary[0] ?? String.Empty;
+
+        /// <summary>
+        /// Получает вторую вставку текста в textBlock (Инструкция к настройкам игры).
+        /// </summary>
+        public string SecondComment => _game.Commentary[1] ?? String.Empty;
+
+        /// <summary>
+        /// Получает третью вставку текста в textBlock (Инструкция к настройкам игры).
+        /// </summary>
+        public string ThirdComment => _game.Commentary[2] ?? String.Empty;
+
+        /// <summary>
+        /// Задаёт или получает коллекцию с прицелами у выбранного макроса.
+        /// </summary>
+        public ObservableCollection<Scope> Scopes
+        {
+            get => _scopes;
             set
             {
-                macros = value;
+                _scopes = value;
+                RaisePropertyChanged(nameof(Scopes));
+            }
+        }
+
+        /// <summary>
+        /// Задаёт или получает индекс выбранного прицела(Scopes).
+        /// </summary>
+        public int SelectedScopeIndex
+        {
+            get => _selectedScopeIndex;
+            set
+            {
+                _selectedScopeIndex = value;
+                LoadScopeAt(_selectedScopeIndex);
+                RaisePropertyChanged(nameof(SelectedScopeIndex));
+            }
+        }
+
+        // public bool AutoChecked { get; set; } = true;
+
+        public bool AutoChecked
+        {
+            get => _autoChecked;
+            set
+            {
+                _autoChecked = value;
+                _performer.LongInstruction = _autoChecked;
+                RaisePropertyChanged(nameof(AutoChecked));
+            }
+        }
+
+        /// <summary>
+        /// Задаёт или получает коллекцию макросов.
+        /// </summary>
+        public ObservableCollection<Macro> Macros
+        {
+            get => _macros;
+            set
+            {
+                _macros = value;
                 RaisePropertyChanged(nameof(Macros));
             }
         }
@@ -141,6 +252,7 @@ namespace Crimson.ViewModels
             {
                 _selectedMacroIndex = value;
                 LoadMacrosAt(_selectedMacroIndex);
+                LoadScopesFor(_selectedMacroIndex);
                 RaisePropertyChanged(nameof(SelectedMacroIndex));
             }
         }

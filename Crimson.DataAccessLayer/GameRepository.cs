@@ -60,13 +60,18 @@ namespace Crimson.DataAccessLayer
 
         private void LoadDefaultData()
         {
-
             _games = new List<Game>()
             {
                 new Game()
                 {
                     Name = "RUST",
                     IconPath = "pack://application:,,,/Resources/RustIcon_2.png",
+                    Commentary = new string[]
+                    {
+                        "В настройках игры установить один из вариантов:",
+                        "- Чувствительность мыши=1.0 и угол обзора(FOV)=75",
+                        "- Чувствительность мыши=0.8 и угол обзора(FOV)=90"
+                    },
                     Macros = new List<Macro>()
                     {
                         new Macro()
@@ -2222,12 +2227,13 @@ namespace Crimson.DataAccessLayer
                 {
                     #region AKM Auto Initialization
                     Name = "AKM",
-                    Scopes = new Dictionary<string, double>()
+                    Scopes = new List<Scope>()
                     {
-                        { "X2", 1.78 },
-                        { "X3", 2.60 },
-                        { "X4", 3.70 },
-                        { "X6", 5.20 },
+                        new Scope(){ Name = "Нет", Multiplier = 1.00 },
+                        new Scope(){ Name = "X2", Multiplier = 1.78 },
+                        new Scope(){ Name = "X3", Multiplier = 2.60 },
+                        new Scope(){ Name = "X4", Multiplier = 3.70 },
+                        new Scope(){ Name = "X6", Multiplier = 5.20 }
                     },
                     Instructions = new List<IInstruction>()
                     {
@@ -2428,12 +2434,13 @@ namespace Crimson.DataAccessLayer
                 {
                     #region QBZ Auto Initialization
                     Name = "QBZ",
-                    Scopes = new Dictionary<string, double>()
+                    Scopes = new List<Scope>()
                     {
-                        { "X2", 1.75 },
-                        { "X3", 2.70 },
-                        { "X4", 3.80 },
-                        { "X6", 5.40 },
+                        new Scope(){ Name = "Нет", Multiplier = 1.00 },
+                        new Scope(){ Name = "X2", Multiplier = 1.75 },
+                        new Scope(){ Name = "X3", Multiplier = 2.70 },
+                        new Scope(){ Name = "X4", Multiplier = 3.80 },
+                        new Scope(){ Name = "X6", Multiplier = 5.40 }
                     },
                     Instructions = new List<IInstruction>()
                     {
@@ -2649,12 +2656,13 @@ namespace Crimson.DataAccessLayer
                 {
                     #region BerylM762 Auto Initialization
                     Name = "BerylM762",
-                    Scopes = new Dictionary<string, double>()
+                    Scopes = new List<Scope>()
                     {
-                        { "X2", 1.73 },
-                        { "X3", 2.65 },
-                        { "X4", 3.70 },
-                        { "X6", 5.25 },
+                        new Scope(){ Name = "Нет", Multiplier = 1.00 },
+                        new Scope(){ Name = "X2", Multiplier = 1.73 },
+                        new Scope(){ Name = "X3", Multiplier = 2.65 },
+                        new Scope(){ Name = "X4", Multiplier = 3.70 },
+                        new Scope(){ Name = "X6", Multiplier = 5.25 }
                     },
                     Instructions = new List<IInstruction>()
                     {
@@ -2988,12 +2996,13 @@ namespace Crimson.DataAccessLayer
                 {
                     #region M416 Auto Initialization
                     Name = "M416",
-                    Scopes = new Dictionary<string, double>()
+                    Scopes = new List<Scope>
                     {
-                        { "X2", 1.75 },
-                        { "X3", 2.70 },
-                        { "X4", 3.80 },
-                        { "X6", 5.40 },
+                        new Scope(){ Name = "Нет", Multiplier = 1.00 },
+                        new Scope(){ Name = "X2", Multiplier = 1.75 },
+                        new Scope(){ Name = "X3", Multiplier = 2.70 },
+                        new Scope(){ Name = "X4", Multiplier = 3.80 },
+                        new Scope(){ Name = "X6", Multiplier = 5.40 }
                     },
                     Instructions = new List<IInstruction>()
                     {
@@ -3179,12 +3188,13 @@ namespace Crimson.DataAccessLayer
                 {
                     #region Scar-L Auto Initialization
                     Name = "SCAR-L",
-                    Scopes = new Dictionary<string, double>()
+                    Scopes = new List<Scope>()
                     {
-                        { "X2", 1.75 },
-                        { "X3", 2.70 },
-                        { "X4", 3.80 },
-                        { "X6", 5.40 },
+                        new Scope(){ Name = "Нет", Multiplier = 1.00 },
+                        new Scope(){ Name = "X2", Multiplier = 1.75 },
+                        new Scope(){ Name = "X3", Multiplier = 2.70 },
+                        new Scope(){ Name = "X4", Multiplier = 3.80 },
+                        new Scope(){ Name = "X6", Multiplier = 5.40 }
                     },
                     Instructions = new List<IInstruction>()
                     {
@@ -3491,7 +3501,12 @@ namespace Crimson.DataAccessLayer
             {
                 Name = "PUBG",
                 IconPath = "pack://application:,,,/Resources/PubgIcon.png",
-                Macros = pubgList
+                Commentary = new string[] 
+                {
+                    "В настройках игры установить:",
+                    "- Вертикальную чувствительность = 1.0"
+                },
+                Macros = pubgList,
             });
         }
     }

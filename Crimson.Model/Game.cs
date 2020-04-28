@@ -16,6 +16,12 @@ namespace Crimson.Models
         /// Путь к иконке.
         /// </summary>
         public string IconPath { get; set; }
+
+        /// <summary>
+        /// Рекомендации к игре.
+        /// </summary>
+        public string[] Commentary { get; set; }
+
         /// <summary>
         /// Макросы.
         /// </summary>

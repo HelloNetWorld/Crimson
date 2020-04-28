@@ -9,7 +9,7 @@
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
                       xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                       mc:Ignorable="d"
-                      Title="RUST - выбор макроса" 
+                      Title="Выбор макроса" 
                       Height="220" Width="420" 
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterScreen"
@@ -34,7 +34,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1.1*"/>
-            <RowDefinition/>
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="1.1*"/>
             <RowDefinition Height="1.25*"/>
         </Grid.RowDefinitions>
 
@@ -65,77 +66,80 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Column="1">
-            <Button Margin="5,5,5,5"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding ClearMacros}"
-                    Content="Очистить"
-                    Foreground="Crimson" 
-                    FontSize="14"
-                    BorderBrush="Crimson"
-                    BorderThickness="2"
-                    Controls:ControlsHelper.ContentCharacterCasing="Normal"
-                    Width="80"
-                    />
-
-            <Button Grid.Column="1"
-                    Margin="5,5,5,5"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Content="Закрыть"
-                    Foreground="Crimson"
-                    FontSize="14"
-                    BorderBrush="Crimson"
-                    BorderThickness="2"
-                    Controls:ControlsHelper.ContentCharacterCasing="Normal"
-                    Width="80"
+                    Grid.Column="1"
+                    Visibility="{Binding ScopeVisibility}"
                     >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction 
-                        TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Controls:MetroWindow}}}" 
-                        MethodName="Close"
-                        />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+            
+            <Label Content="Прицел:"
+                   Foreground="Crimson"
+                   Style="{StaticResource MetroLabel}"
+                   FontSize="14"
+                   VerticalAlignment="Center"
+                   />
+
+            <ComboBox Style="{StaticResource MetroComboBox}"
+                      ItemsSource="{Binding Scopes}"
+                      DisplayMemberPath="Name"
+                      SelectedIndex="{Binding SelectedScopeIndex}"
+                      Width="100"
+                      Foreground="Crimson"
+                      BorderBrush="Crimson"
+                      Controls:ControlsHelper.FocusBorderBrush="Crimson"
+                      BorderThickness="2"
+                      >
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Visibility="{Binding ShootingModeVisibility}"
+                    Margin="5,0,0,0">
+            
+            <Label Content="Режим стрельбы:"
+                   Foreground="Crimson"
+                   Style="{StaticResource MetroLabel}"
+                   FontSize="14"
+                   VerticalAlignment="Center"
+                   />
+            
+            <RadioButton Content="Auto"
+                         IsChecked="{Binding AutoChecked}"
+                         Margin="3"
+                         FontSize="14"
+                         Foreground="Crimson"
+                         Style="{StaticResource MetroRadioButton}"
+                         />
+            
+            <RadioButton Content="Single"
+                         IsChecked="{Binding SingleChecked}"
+                         Margin="3"
+                         FontSize="14"
+                         Foreground="Crimson"
+                         Style="{StaticResource MetroRadioButton}"
+                         />
         </StackPanel>
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Grid.ColumnSpan="2"
                     >
             <ContentControl Width="52"
                             Height="52"
                             Content="{StaticResource AlertIcon}"
                             />
-            <TextBlock
-                       TextWrapping="Wrap"
+            <TextBlock TextWrapping="Wrap"
                        FontSize="14"
                        Foreground="Crimson" 
                        Width="353"
                        >
-                    В настройках игры установить один из вариантов:
-                <LineBreak/>
-                 - Чувствительность мыши=1.0 и угол обзора(FOV)=75
-                <LineBreak/>
-                 - Чувствительность мыши=0.8 и угол обзора(FOV)=90
+                    <Run Text="{Binding FirstComment, Mode=OneWay}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding SecondComment, Mode=OneWay}"/>
+                    <LineBreak/>
+                    <Run Text="{Binding ThirdComment, Mode=OneWay}"/>
             </TextBlock>
         </StackPanel>
-        <!-- Пока не нужна кнопка - 'Установить кнопки' -->
-        <!--<Button Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Margin="5,5,5,5"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding SetHotKeys}"
-                    Content="Установить кнопки"
-                    Foreground="Crimson"
-                    FontSize="14"
-                    BorderBrush="Crimson"
-                    BorderThickness="2" 
-                    Controls:ControlsHelper.ContentCharacterCasing="Normal"
-                    />-->
 
-
-        <Grid Grid.Row="2"
+        <Grid Grid.Row="3"
               Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>

@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Media;
 using System.IO;
 using Crimson.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Crimson.Services
 {
@@ -22,6 +24,7 @@ namespace Crimson.Services
         private bool _leftButtonPressed = false;
         private Keys _hotKey = Keys.F12;
         private bool _performAllowByKey;
+        private bool _longInstruction = true;
 
         #endregion
 
@@ -42,6 +45,10 @@ namespace Crimson.Services
         #endregion
 
         #region Public Properties
+        /// <summary>
+        /// Возвращает или задаёт множитель перемещения курсора по Y.
+        /// </summary>
+        public double MultiplyerY { get; set; } = 1.00;
 
         /// <summary>
         /// Возвращает или задаёт макрос, выполненине которого будет по нажатию ЛКМ,
@@ -54,7 +61,7 @@ namespace Crimson.Services
         /// </summary>
         public bool PerformAllowByKey
         {
-            get => _performAllowByKey; 
+            get => _performAllowByKey;
             set
             {
                 _performAllowByKey = value;
@@ -79,6 +86,31 @@ namespace Crimson.Services
             }
         }
 
+        /// <summary>
+        /// Возвращает или задает какую инструкцию использовать (длинную или короткую).
+        /// </summary>
+        public bool LongInstruction 
+        { 
+            get => _longInstruction;
+            set
+            {
+                if (value == false)
+                {
+                    if (Macro.InstructionsSingleFire == null)
+                    {
+                        throw new ArgumentException(nameof(_longInstruction));
+                    }
+                }
+                else
+                {
+                    if (Macro.Instructions == null)
+                    {
+                        throw new ArgumentException(nameof(_longInstruction));
+                    }
+                }
+                _longInstruction = value;
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -129,34 +161,50 @@ namespace Crimson.Services
                 if (!_leftButtonPressed && Macro == null && !PerformAllowByKey && !PerformEnable)
                     return;
 
+                    List<IInstruction> Instructions;
+                    if (LongInstruction == true)
+                    {
+                        Instructions = Macro.Instructions;
+                    }
+                    else
+                    {
+                        Instructions = Macro.InstructionsSingleFire;
+                    }
+
                 // Выполняем смещение указателя мыши до тех пор,
                 // пока нажата левая кнопка мышки,
                 // либо до конца массива смещений.
-                for (int index = 0; index < Macro.Instructions.Count; ++index)
+                for (int index = 0; index < Instructions.Count; ++index)
                 {
                     IInstruction currentInstruction = Macro.Instructions[index];
-
-                    // mouse_event(1U, Macro.Instructions[index].DX, MacroInfo.CordsShifts[index].DY, 0U, 0);
-
                     switch (currentInstruction?.Type)
                     {
                         case (InstructionType.MouseShiftInstruction):
                             MouseShiftInstruction shift = currentInstruction as MouseShiftInstruction;
-                            mouse_event(1U, shift.DX, shift.DY, 0U, 0);
+                            int dY = shift.DY;
+                            if (MultiplyerY != 1.00)
+                            {
+                                dY = (int)Math.Round(MultiplyerY * dY);
+                            }
+                            mouse_event(1U, shift.DX, dY, 0U, 0);
                             break;
+
                         case (InstructionType.DelayInstruction):
                             DelayInstruction delay = currentInstruction as DelayInstruction;
                             Thread.Sleep(delay.Delay);
                             break;
+
                         case (InstructionType.ButtonInstruction):
                             ButtonInstruction button = currentInstruction as ButtonInstruction;
                             // TODO: пока не реализовано нажатие на клавишу клавиатуры.
                             break;
+
                         default:
                             // Вероятно нужна какая-то запись в лог о неизвестной инструкции.
                             break;
+
                     }
-                    
+
                     if (!_leftButtonPressed || index == Macro.Instructions.Count - 1 || !PerformAllowByKey || !PerformEnable)
                         break;
                 }

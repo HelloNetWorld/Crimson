@@ -3,3 +3,4 @@ C:\Users\Виктор\source\repos\Crimson\Crimson.Model\bin\Release\Crimson.Mod
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Release\Crimson.Models.csproj.CoreCompileInputs.cache
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Release\Crimson.Models.dll
 C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Release\Crimson.Models.pdb
+C:\Users\Виктор\source\repos\Crimson\Crimson.Model\obj\Release\Crimson.Models.csprojAssemblyReference.cache

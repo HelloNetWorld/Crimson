@@ -93,16 +93,6 @@ namespace Crimson.ViewModels
         }
         #endregion
 
-        //#region Public Methods
-        ///// <summary>
-        ///// Обработчик срабатывает во время закрытия окна.
-        ///// </summary>
-        //public void MetroWindow_Closing()
-        //{
-        //    Properties.Settings.Default.Save();
-        //}
-        //#endregion
-
         #region Public Properties
 
         /// <summary>
