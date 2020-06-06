@@ -43,3 +43,5 @@ C:\Users\Виктор\source\repos\Crimson\Crimson\obj\Release\Crimson.csproj.Co
 C:\Users\Виктор\source\repos\Crimson\Crimson\obj\Release\Crimson.csproj.CopyComplete
 C:\Users\Виктор\source\repos\Crimson\Crimson\obj\Release\Crimson.exe
 C:\Users\Виктор\source\repos\Crimson\Crimson\obj\Release\Crimson.pdb
+C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Release\Newtonsoft.Json.dll
+C:\Users\Виктор\source\repos\Crimson\Crimson\bin\Release\Newtonsoft.Json.xml

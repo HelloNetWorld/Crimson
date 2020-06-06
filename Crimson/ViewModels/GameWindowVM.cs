@@ -216,8 +216,6 @@ namespace Crimson.ViewModels
             }
         }
 
-        // public bool AutoChecked { get; set; } = true;
-
         public bool AutoChecked
         {
             get => _autoChecked;

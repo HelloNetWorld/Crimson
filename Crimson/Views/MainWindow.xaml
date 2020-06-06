@@ -66,6 +66,7 @@
                         Content="Settings" FontSize="12"/>
             </StackPanel>
         </Border>-->
+        
         <ItemsControl Margin="5"
                       ItemsSource="{Binding Games}" 
                       Width="782"

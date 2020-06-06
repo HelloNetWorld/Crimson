@@ -8,10 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Configuration;
-using System.Diagnostics;
-using System.Windows.Forms;
-
 namespace Crimson.Properties {
     
     
@@ -26,19 +22,16 @@ namespace Crimson.Properties {
                 return defaultInstance;
             }
         }
-
-        [UserScopedSetting]
-        [DebuggerNonUserCode]
-        [DefaultSettingValue("F12")]
-        public Keys HotKey
-        {
-            get
-            {
-                return (Keys)this[nameof(HotKey)];
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F12")]
+        public global::System.Windows.Forms.Keys Hotkey {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["Hotkey"]));
             }
-            set
-            {
-                this[nameof(HotKey)] = (object)value;
+            set {
+                this["Hotkey"] = value;
             }
         }
     }

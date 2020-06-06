@@ -1,14 +1,9 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <applicationSettings>
-    <Crimson.Properties.Settings>
-      <setting name="HotKey" serializeAs="String">
-        <value>F12</value>
-      </setting>
-    </Crimson.Properties.Settings>
-  </applicationSettings>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Crimson.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Hotkey" Type="System.Windows.Forms.Keys" Scope="User">
+      <Value Profile="(Default)">F12</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

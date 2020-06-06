@@ -1,15 +1,8 @@
 ﻿using Crimson.Services;
-using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Configuration;
 
 namespace Crimson.ViewModels
 {
@@ -23,7 +16,7 @@ namespace Crimson.ViewModels
 
         #region Constructor
         /// <summary>
-        /// Initializes an instance of <see cref="EditKeyBindingVM"/>.
+        /// Инициализация класса <see cref="EditKeyBindingVM"/>.
         /// </summary>
         /// <param name="performService"></param>
         public EditKeyBindingVM(PerformService performService)

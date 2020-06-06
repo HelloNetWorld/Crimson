@@ -1,17 +1,12 @@
 ﻿using Crimson.DataAccessLayer;
 using Crimson.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crimson.Services
 {
     public class GameDataService : IDataService
     {
-        
-        IRepository<Game> _repository;
+        private IRepository<Game> _repository;
         public GameDataService(IRepository<Game> repository)
         {
             _repository = repository;

@@ -1,12 +1,6 @@
 ﻿using Crimson.DataAccessLayer;
 using Crimson.Services;
 using Crimson.ViewModels;
-using Crimson.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crimson
 {

@@ -153,7 +153,7 @@ namespace Crimson.Services
         /// </summary>
         /// <param name="indexOfGame">Индекс игры в списке у пользователя(свойствао User.Games)</param>
         /// <param name="indexOfMacro">Индекс игры в списке у пользователя(свойствао User.Games)</param>
-        private async void PerformMacroAsync()
+        private async Task PerformMacroAsync()
         {
             await Task.Factory.StartNew(() =>
             {
@@ -233,7 +233,7 @@ namespace Crimson.Services
             {
                 var mediaPlayer = new MediaPlayer();
                 var mp3filename = "\\Resources\\Sounds\\denied.mp3";
-                string mp3Path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + mp3filename;
+                string mp3Path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + mp3filename;
                 mediaPlayer.Volume = 0.125;
                 mediaPlayer.Open(new System.Uri(mp3Path, System.UriKind.Relative));
                 mediaPlayer.Play();

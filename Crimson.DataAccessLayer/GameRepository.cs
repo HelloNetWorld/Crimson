@@ -10,12 +10,17 @@ namespace Crimson.DataAccessLayer
 {
     public class GameRepository : IRepository<Game>
     {
-        private static List<Game> _games;
+        private static IList<Game> _games;
 
         public GameRepository()
         {
             if (_games == null)
                 LoadDefaultData();
+        }
+
+        public void AddGame(Game game)
+        {
+            _games.Add(game);
         }
 
         public IEnumerable<Game> GetAll()
