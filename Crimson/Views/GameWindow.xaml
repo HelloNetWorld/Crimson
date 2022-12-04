@@ -9,14 +9,15 @@
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
                       xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                       mc:Ignorable="d"
-                      Title="Выбор макроса" 
+                      Title="Тренировка"
                       Height="220" Width="420" 
                       ResizeMode="NoResize" 
                       WindowStartupLocation="CenterScreen"
                       FontFamily="Candara"
                       DataContext="{Binding Source={StaticResource mainViewModelLocator},  Path=GameWindowVM}"
                       >
-    
+    <!--Title="Выбор макроса"-->
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <ei:CallMethodAction 
@@ -44,8 +45,8 @@
                         Orientation="Horizontal"
                         Margin="5"
                         >
-
-            <Label Content="Макрос:"
+            <!--Content="Макрос:"-->
+            <Label     Content="Тренинг:"
                        Foreground="Crimson"
                        Style="{StaticResource MetroLabel}"
                        FontSize="14"

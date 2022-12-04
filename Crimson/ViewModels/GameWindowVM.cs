@@ -18,6 +18,7 @@ namespace Crimson.ViewModels
     public class GameWindowVM : BindableBase
     {
         #region Private variables
+
         private readonly PerformService _performer;
         private readonly IDialogService _dialogService;
         private Game _game;
@@ -114,10 +115,10 @@ namespace Crimson.ViewModels
         /// <param name="index"></param>
         private void LoadMacrosAt(int index)
         {
-            if (_macros != null && _game != null)
+            if (_macros != null && _game != null && index >= 0 && index < _game.Macros.Count)
             {
-                if (index < 0 && index >= _game.Macros.Count)
-                    throw new IndexOutOfRangeException(nameof(index));
+                // if (index < 0 || index >= _game.Macros.Count)
+                //     throw new IndexOutOfRangeException(nameof(index));
 
                 _performer.Macro = _game
                     .Macros
@@ -126,7 +127,7 @@ namespace Crimson.ViewModels
         }
 
         /// <summary>
-        /// Загружает соответсвующий макрос по индексу в List<Macro>.
+        /// Загружает соответсвующий прицел по индексу в List<Macro>.
         /// </summary>
         /// <param name="index"></param>
         private void LoadScopeAt(int index)
@@ -177,17 +178,17 @@ namespace Crimson.ViewModels
         /// <summary>
         /// Получает первую вставку текста в textBlock (Инструкция к настройкам игры).
         /// </summary>
-        public string FirstComment => _game.Commentary[0] ?? String.Empty;
+        public string FirstComment => _game.Commentary.Any() ? _game.Commentary[0] ?? String.Empty : String.Empty;
 
         /// <summary>
         /// Получает вторую вставку текста в textBlock (Инструкция к настройкам игры).
         /// </summary>
-        public string SecondComment => _game.Commentary[1] ?? String.Empty;
+        public string SecondComment => _game.Commentary.Length > 1 ? _game.Commentary[1] ?? String.Empty : String.Empty;
 
         /// <summary>
         /// Получает третью вставку текста в textBlock (Инструкция к настройкам игры).
         /// </summary>
-        public string ThirdComment => _game.Commentary[2] ?? String.Empty;
+        public string ThirdComment => _game.Commentary.Length > 2 ? _game.Commentary[2] ?? String.Empty : String.Empty;
 
         /// <summary>
         /// Задаёт или получает коллекцию с прицелами у выбранного макроса.

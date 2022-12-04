@@ -22,7 +22,9 @@ namespace Crimson.Services
 
         private readonly UserActivityHook _actHook;
         private bool _leftButtonPressed = false;
+        private bool _crawlingKeyPressed = false;
         private Keys _hotKey = Keys.F12;
+        private Keys _crawlingKey = Keys.LControlKey;
         private bool _performAllowByKey;
         private bool _longInstruction = true;
 
@@ -34,6 +36,7 @@ namespace Crimson.Services
         #endregion
 
         #region Constructors
+
         public PerformService()
         {
             _actHook = new UserActivityHook();
@@ -41,10 +44,13 @@ namespace Crimson.Services
             _actHook.OnMouseUp += new MouseEventHandler(OnMouseUp);
             _actHook.OnMouseDown += new MouseEventHandler(OnMouseDown);
             _actHook.KeyDown += new KeyEventHandler(OnHotKeyDown);
+            _actHook.KeyUp += new KeyEventHandler(OnHotKeyUp);
         }
+
         #endregion
 
         #region Public Properties
+
         /// <summary>
         /// Возвращает или задаёт множитель перемещения курсора по Y.
         /// </summary>
@@ -68,10 +74,12 @@ namespace Crimson.Services
                 RaisePropertyChanged(nameof(PerformAllowByKey));
             }
         }
+
         /// <summary>
         /// Возвращает или задает значение, указывающее, можно ли выполнять макрос.
         /// </summary>
         public bool PerformEnable { get; set; }
+
         /// <summary>
         /// Возвращает или задает ключ(Keys), который используется в качестве включения/отключения работы макроса (свойство PerformEnable).
         /// По умолчанию равен Keys.F12
@@ -83,6 +91,20 @@ namespace Crimson.Services
             {
                 _hotKey = value;
                 RaisePropertyChanged(nameof(HotKey));
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задает ключ(Keys), который используется в качестве приседа/красться (свойство PerformEnable).
+        /// По умолчанию равен Keys.LControlKey
+        /// </summary>
+        public Keys CrawlingKey
+        {
+            get => _crawlingKey;
+            set
+            {
+                _crawlingKey = value;
+                RaisePropertyChanged(nameof(CrawlingKey));
             }
         }
 
@@ -111,6 +133,7 @@ namespace Crimson.Services
                 _longInstruction = value;
             }
         }
+
         #endregion
 
         #region Private Methods
@@ -133,7 +156,12 @@ namespace Crimson.Services
 
         private void OnHotKeyDown(object sender, KeyEventArgs e)
         {
-            if (PerformEnable && e.KeyCode == HotKey)
+            if (!PerformEnable)
+            {
+                return;
+            }
+
+            if (e.KeyCode == HotKey)
             {
                 PerformAllowByKey = !PerformAllowByKey;
                 if (PerformAllowByKey)
@@ -144,6 +172,24 @@ namespace Crimson.Services
                 {
                     PlayStopMusicAsync();
                 }
+            }
+
+            if (e.KeyCode == CrawlingKey)
+            {
+                _crawlingKeyPressed = true;
+            }
+        }
+
+        private void OnHotKeyUp(object sender, KeyEventArgs e)
+        {
+            if (!PerformEnable)
+            {
+                return;
+            }
+
+            if (e.KeyCode == CrawlingKey)
+            {
+                _crawlingKeyPressed = false;
             }
         }
 
@@ -161,22 +207,30 @@ namespace Crimson.Services
                 if (!_leftButtonPressed && Macro == null && !PerformAllowByKey && !PerformEnable)
                     return;
 
-                    List<IInstruction> Instructions;
-                    if (LongInstruction == true)
-                    {
-                        Instructions = Macro.Instructions;
-                    }
-                    else
-                    {
-                        Instructions = Macro.InstructionsSingleFire;
-                    }
+                List<IInstruction> instructions;
+                if (LongInstruction == true)
+                {
+                    instructions = Macro.Instructions;
+                }
+                else
+                {
+                    instructions = Macro.InstructionsSingleFire;
+                }
+
+                var hasCrawlingInstructions = Macro.InstructionsCrawling != null && Macro.InstructionsCrawling.Count == Macro.Instructions.Count;
 
                 // Выполняем смещение указателя мыши до тех пор,
                 // пока нажата левая кнопка мышки,
                 // либо до конца массива смещений.
-                for (int index = 0; index < Instructions.Count; ++index)
+                for (int index = 0; index < instructions.Count; ++index)
                 {
                     IInstruction currentInstruction = Macro.Instructions[index];
+
+                    if (_crawlingKeyPressed && hasCrawlingInstructions)
+                    {
+                        currentInstruction = Macro.InstructionsCrawling[index];
+                    }
+
                     switch (currentInstruction?.Type)
                     {
                         case (InstructionType.MouseShiftInstruction):
@@ -192,6 +246,7 @@ namespace Crimson.Services
                         case (InstructionType.DelayInstruction):
                             DelayInstruction delay = currentInstruction as DelayInstruction;
                             Thread.Sleep(delay.Delay);
+                            //Task.Delay(delay.Delay);
                             break;
 
                         case (InstructionType.ButtonInstruction):
@@ -208,6 +263,7 @@ namespace Crimson.Services
                     if (!_leftButtonPressed || index == Macro.Instructions.Count - 1 || !PerformAllowByKey || !PerformEnable)
                         break;
                 }
+
             });
         }
 

@@ -43,6 +43,7 @@ namespace Crimson.Models
 
         public InstructionType Type => InstructionType.MouseShiftInstruction;
     }
+
     /// <summary>
     /// Задержка.
     /// </summary>
@@ -73,6 +74,7 @@ namespace Crimson.Models
 
         public InstructionType Type => InstructionType.DelayInstruction;
     }
+
     /// <summary>
     /// Нажатие на клавишу клавиатуры.
     /// </summary>

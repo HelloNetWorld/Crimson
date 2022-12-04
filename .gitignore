@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/Crimson
+/ConvertToCrimson/obj
+/ConvertToCrimson/bin/Debug/net6.0
+*.user

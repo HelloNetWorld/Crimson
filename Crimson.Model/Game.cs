@@ -12,6 +12,7 @@ namespace Crimson.Models
         /// Название игры.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Путь к иконке.
         /// </summary>
@@ -26,6 +27,7 @@ namespace Crimson.Models
         /// Макросы.
         /// </summary>
         public List<Macro> Macros { get; set; }
+
         /// <summary>
         /// Флаг указывающий разрешено ли удалять данный Item из Repository.
         /// </summary>
