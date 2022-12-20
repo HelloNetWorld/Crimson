@@ -32,6 +32,7 @@ namespace Crimson.ViewModels
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Initializes an instance of <see cref="GameWindowVM"/>.
         /// </summary>
@@ -49,9 +50,11 @@ namespace Crimson.ViewModels
 
             _performer.PropertyChanged += Performer_PropertyChanged;
         }
+
         #endregion
 
         #region Private Methods
+
         /// <summary>
         /// Загружает команды.
         /// </summary>
@@ -161,6 +164,7 @@ namespace Crimson.ViewModels
         #endregion
 
         #region Public properties
+
         /// <summary>
         /// Задаёт и получает видимость элементов управления связанных с прицелами (Scopes).
         /// </summary>
@@ -279,9 +283,11 @@ namespace Crimson.ViewModels
         /// Задаёт или получает команду включения макроса.
         /// </summary>
         public DelegateCommand<object> ActivateMacros { get; set; }
+
         #endregion
 
         #region Public Methods
+
         /// <summary>
         /// Обработчик срабатывает во время закрытия окна.
         /// </summary>
@@ -290,6 +296,7 @@ namespace Crimson.ViewModels
             _performer.PerformAllowByKey = false;
             _performer.PerformEnable = false;
         }
+
         #endregion
     }
 }

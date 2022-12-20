@@ -58,16 +58,16 @@ namespace Crimson.Utility
         }
 
         /// <summary>
-        /// Registers a recipient for a type of message T and a matching context. The action parameter will be executed
+        /// Registers a recipient for a type of message T and a matching token. The action parameter will be executed
         /// when a corresponding message is sent.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="recipient"></param>
         /// <param name="action"></param>
-        /// <param name="context"></param>
-        public void Register<T>(object recipient, Action<T> action, object context)
+        /// <param name="token"></param>
+        public void Register<T>(object recipient, Action<T> action, object token)
         {
-            var key = new MessengerKey(recipient, context);
+            var key = new MessengerKey(recipient, token);
             Dictionary.TryAdd(key, action);
         }
 
@@ -82,15 +82,15 @@ namespace Crimson.Utility
         }
 
         /// <summary>
-        /// Unregisters a messenger recipient with a matching context completely. After this method is executed, the recipient will
+        /// Unregisters a messenger recipient with a matching token completely. After this method is executed, the recipient will
         /// no longer receive any messages.
         /// </summary>
         /// <param name="recipient"></param>
-        /// <param name="context"></param>
-        public void Unregister(object recipient, object context)
+        /// <param name="token"></param>
+        public void Unregister(object recipient, object token)
         {
             object action;
-            var key = new MessengerKey(recipient, context);
+            var key = new MessengerKey(recipient, token);
             Dictionary.TryRemove(key, out action);
         }
 
@@ -107,16 +107,16 @@ namespace Crimson.Utility
 
         /// <summary>
         /// Sends a message to registered recipients. The message will reach all recipients that are
-        /// registered for this message type and matching context.
+        /// registered for this message type and matching token.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="message"></param>
-        /// <param name="context"></param>
-        public void Send<T>(T message, object context)
+        /// <param name="token"></param>
+        public void Send<T>(T message, object token)
         {
             IEnumerable<KeyValuePair<MessengerKey, object>> result;
 
-            if (context == null)
+            if (token == null)
             {
                 // Get all recipients where the context is null.
                 result = from r in Dictionary where r.Key.Context == null select r;
@@ -124,7 +124,7 @@ namespace Crimson.Utility
             else
             {
                 // Get all recipients where the context is matching.
-                result = from r in Dictionary where r.Key.Context != null && r.Key.Context.Equals(context) select r;
+                result = from r in Dictionary where r.Key.Context != null && r.Key.Context.Equals(token) select r;
             }
 
             foreach (var action in result.Select(x => x.Value).OfType<Action<T>>())

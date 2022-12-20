@@ -11,20 +11,24 @@ using System;
 using Crimson.DataAccessLayer;
 using Crimson.Extensions;
 using Crimson.Utility;
+using Crimson.Utility.Messages;
 
 namespace Crimson.ViewModels
 {
     public class MainWindowVM : BindableBase
     {
         #region Private variables
+
         private readonly IDataService _gameDataService;
         private readonly PerformService _performer;
         private readonly IDialogService _dialogService;
         private ObservableCollection<GameVM> _games;
-        private string keyBinding;
+        private string _keyBinding;
+
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Initializes an instance of <see cref="MainWindowVM"/>.
         /// </summary>
@@ -43,15 +47,23 @@ namespace Crimson.ViewModels
 
             _performer.PropertyChanged += _performer_PropertyChanged;
 
-            LoadData();
-
-            LoadCommands();
+            Messenger.Default.Register<string>(this, OnCodeValidates, MessengerToken.CodeValid);
         }
-
 
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Срабатывает когда было передано соответсвющее собщение(<see cref="Messenger.Send{T}(T)"/>).
+        /// </summary>
+        /// <param name="game"></param>
+        private void OnCodeValidates(object code)
+        {
+            LoadData();
+            LoadCommands();
+        }
+
         /// <summary>
         /// Срабатывает в случе когда меняется свойство PerformService.
         /// </summary>
@@ -59,7 +71,6 @@ namespace Crimson.ViewModels
         /// <param name="e"></param>
         private void _performer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-
             KeyBinding = _performer.HotKey.ToString();
         }
 
@@ -91,6 +102,7 @@ namespace Crimson.ViewModels
 
             KeyBinding = _performer.HotKey.ToString();
         }
+
         #endregion
 
         #region Public Properties
@@ -105,10 +117,10 @@ namespace Crimson.ViewModels
         /// </summary>
         public string KeyBinding 
         { 
-            get => keyBinding;
+            get => _keyBinding;
             set
             {
-                keyBinding = value;
+                _keyBinding = value;
                 RaisePropertyChanged(nameof(KeyBinding));
             }
         }
@@ -125,19 +137,23 @@ namespace Crimson.ViewModels
                 RaisePropertyChanged(nameof(Games));
             }
         }
+
         #endregion
     }
 
     public class GameVM : BindableBase
     {
         #region Private variables
+
         private readonly IDialogService _dialogService;
         private Game _game;
         private string _icon;
         private string _name;
+
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Initializes an instance of <see cref="GameVM"/>.
         /// </summary>
@@ -154,9 +170,11 @@ namespace Crimson.ViewModels
             LoadData();
             LoadCommands();
         }
+
         #endregion
 
         #region Private Methods
+
         /// <summary>
         /// Загржует данные.
         /// </summary>
@@ -183,9 +201,11 @@ namespace Crimson.ViewModels
 
             _dialogService.ShowGameDialog();
         }
+
         #endregion
 
         #region Public Properties
+
         /// <summary>
         /// Задаёт или получает пусть к иконке Game.
         /// </summary>
@@ -216,6 +236,7 @@ namespace Crimson.ViewModels
         /// Задаёт или получает команду GameDetailCommand.
         /// </summary>
         public DelegateCommand GameDetailCommand { get; set; }
+
         #endregion
     }
 }

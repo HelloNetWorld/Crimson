@@ -9,12 +9,15 @@ namespace Crimson.ViewModels
     public class EditKeyBindingVM : BindableBase
     {
         #region Private variables
+
         private readonly PerformService _performer;
         private string keyBinding;
         private readonly KeysConverter _keysConverter = new KeysConverter();
+
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Инициализация класса <see cref="EditKeyBindingVM"/>.
         /// </summary>
@@ -33,6 +36,7 @@ namespace Crimson.ViewModels
         #endregion
 
         #region Public Properties
+
         /// <summary>
         /// Возвращает или задает кнопку.
         /// </summary>
@@ -45,6 +49,7 @@ namespace Crimson.ViewModels
                 RaisePropertyChanged(nameof(KeyBinding));
             }
         }
+
         #endregion
 
         #region Public Methods

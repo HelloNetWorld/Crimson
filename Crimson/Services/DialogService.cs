@@ -5,8 +5,20 @@ namespace Crimson.Services
 {
     public class DialogService : IDialogService
     {
+        private Window _mainWindow;
         private Window _editKeyBindingWindow;
         private Window _gameDetail;
+
+        public void ShowMainWindow()
+        {
+            _mainWindow = new MainWindow();
+            _mainWindow.ShowDialog();
+        }
+
+        public void CloseMainWindow()
+        {
+            _mainWindow.Close();
+        }
 
         public void ShowGameDialog()
         {

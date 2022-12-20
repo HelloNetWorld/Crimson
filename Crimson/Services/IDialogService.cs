@@ -2,8 +2,10 @@
 {
     public interface IDialogService
     {
-        void CloseGameDialog();
+        void ShowMainWindow();
+        void CloseMainWindow();
         void ShowGameDialog();
+        void CloseGameDialog();
         void ShowEditKeyDialog();
         void CloseEditKeyDialog();
     }

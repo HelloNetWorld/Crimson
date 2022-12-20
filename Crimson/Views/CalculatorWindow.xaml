@@ -1,0 +1,429 @@
+﻿<Controls:MetroWindow
+    x:Class="Crimson.Views.CalculatorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:Converter="clr-namespace:Crimson.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Crimson.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Калькулятор"
+    Width="399.666"
+    Height="299.498"
+    DataContext="{Binding Source={StaticResource mainViewModelLocator}, Path=CalculatorVM}"
+    ResizeMode="CanMinimize"
+    Visibility="{Binding IsShown, Converter={StaticResource BoolToHiddenConverter}}"
+    mc:Ignorable="d">
+    <Grid
+        Height="270"
+        VerticalAlignment="Top"
+        Background="White">
+        <Button
+            Width="46"
+            Height="31"
+            Margin="11,115,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2,2,2,1"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="7"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+
+        <TextBox
+            Name="tb"
+            Width="201"
+            Height="38"
+            Margin="10,20,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Black"
+            BorderThickness="2"
+            FontSize="20"
+            Text=""
+            TextWrapping="Wrap">
+            <TextBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </TextBox.Foreground>
+
+        </TextBox>
+
+        <Button
+            Width="46"
+            Height="31"
+            Margin="62,115,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="8"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="113,115,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="9"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="164,115,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="/"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="11,151,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="4"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="62,151,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="5"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="113,151,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="6"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="164,151,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="*"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="11,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="1"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="62,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="2"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="113,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="3"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="164,187,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="-"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="11,223,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="0"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="97"
+            Height="31"
+            Margin="62,223,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding CalculateCommand}"
+            Content="="
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="164,223,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding ButtonClickCommand}"
+            CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+            Content="+"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="97"
+            Height="31"
+            Margin="113,79,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding TurnOffCommand}"
+            Content="Off"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="11,79,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding DeleteCommand}"
+            Content="Del"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <Button
+            Width="46"
+            Height="31"
+            Margin="62,79,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderThickness="2"
+            Command="{Binding DeleteCommand}"
+            Content="R"
+            FontSize="18">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+            </Button.Background>
+        </Button>
+        <CheckBox
+            Name="cb1"
+            Margin="225,239,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Поверх всех окон" />
+        <Rectangle
+            Width="168"
+            Height="250"
+            Margin="216,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Stroke="Black" />
+
+    </Grid>
+</Controls:MetroWindow>

@@ -106,17 +106,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter .cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\GameDataService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Services\SaverLoader.cs" />
+    <Compile Include="Utility\Messages\MessengerToken.cs" />
     <Compile Include="Utility\Messenger.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="ViewModels\CalculatorVM.cs" />
     <Compile Include="ViewModels\EditKeyBindingVM.cs" />
     <Compile Include="ViewModels\GameWindowVM.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
+    <Compile Include="Views\CalculatorWindow.xaml.cs">
+      <DependentUpon>CalculatorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditKeyBinding.xaml.cs">
       <DependentUpon>EditKeyBinding.xaml</DependentUpon>
     </Compile>
@@ -160,7 +166,15 @@
     <None Include="Resources\RustIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\Dictionaries\CalculatorDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Icons\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CalculatorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,9 +224,7 @@
       <Name>Crimson.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utility\Messages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\PubgIcon.png" />
   </ItemGroup>
