@@ -20,7 +20,7 @@
         Background="White">
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="11,115,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -43,14 +43,14 @@
         <TextBox
             Name="tb"
             Width="201"
-            Height="38"
+            Height="41"
             Margin="10,20,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="Black"
             BorderThickness="2"
             FontSize="20"
-            Text=""
+            Text="{Binding Text}"
             TextWrapping="Wrap">
             <TextBox.Foreground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
@@ -60,7 +60,7 @@
 
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="62,115,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -81,7 +81,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="113,115,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -102,7 +102,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="164,115,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -123,7 +123,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="11,151,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -144,7 +144,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="62,151,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -165,7 +165,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="113,151,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -186,7 +186,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="164,151,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -207,7 +207,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="11,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -228,7 +228,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="62,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -249,7 +249,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="113,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -270,7 +270,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="164,187,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -291,7 +291,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="11,223,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -312,7 +312,7 @@
         </Button>
         <Button
             Width="97"
-            Height="31"
+            Height="41"
             Margin="62,223,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -332,7 +332,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="164,223,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -353,7 +353,7 @@
         </Button>
         <Button
             Width="97"
-            Height="31"
+            Height="41"
             Margin="113,79,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -373,7 +373,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="11,79,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -393,7 +393,7 @@
         </Button>
         <Button
             Width="46"
-            Height="31"
+            Height="41"
             Margin="62,79,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"

@@ -84,8 +84,8 @@ namespace Crimson.ViewModels
             if (text == "0753")
             {
                 Messenger.Default.Send<string>(text, MessengerToken.CodeValid);
-                _dialogService.ShowMainWindow();
                 IsShown = false;
+                _dialogService.ShowMainWindow();
             }
 
             try
