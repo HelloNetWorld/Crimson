@@ -61,6 +61,7 @@ namespace Crimson.ViewModels
         private void LoadData()
         {
             IsShown = true;
+            Messenger.Default.Register<object>(this, (o) => TurnOff(), MessengerToken.AppClose);
         }
 
         /// <summary>
@@ -165,7 +166,7 @@ namespace Crimson.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Основное нажатие на клавишу, добавляет символ нажатой клавиши на клавиатуре калькулятора.
         /// </summary>
         private void ButtonClick(object parameter)
         {
@@ -173,7 +174,7 @@ namespace Crimson.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Удалить последний символ.
         /// </summary>
         private void Backspace()
         {

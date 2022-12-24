@@ -103,6 +103,14 @@ namespace Crimson.ViewModels
             KeyBinding = _performer.HotKey.ToString();
         }
 
+        /// <summary>
+        /// Обработчик срабатывает во время закрытия окна.
+        /// </summary>
+        public void MetroWindow_Closing()
+        {
+            Messenger.Default.Send<object>(null, MessengerToken.AppClose);
+        }
+
         #endregion
 
         #region Public Properties

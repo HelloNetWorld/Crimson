@@ -17,6 +17,7 @@ namespace Crimson.Services
 
         public void CloseMainWindow()
         {
+            Application.Current.Shutdown();
             _mainWindow.Close();
         }
 

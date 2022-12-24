@@ -9,6 +9,7 @@ namespace Crimson.Utility.Messages
     public enum MessengerToken
     {
         CodeValid,
+        AppClose
         //WidthChanged,
         //HeightChanged
     }
