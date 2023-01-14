@@ -24,6 +24,7 @@ namespace Crimson.ViewModels
         private readonly IDialogService _dialogService;
         private string _text;
         private bool _isShown;
+
         #endregion
 
         #region Constructor
@@ -77,7 +78,7 @@ namespace Crimson.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Производит расчёт согласно индикатору калькулятора.
         /// </summary>
         private void Calculate()
         {
@@ -150,7 +151,7 @@ namespace Crimson.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Очистка индиактора приложения.
         /// </summary>
         private void Clear()
         {
@@ -158,7 +159,7 @@ namespace Crimson.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Выключает приложение.
         /// </summary>
         private void TurnOff()
         {
