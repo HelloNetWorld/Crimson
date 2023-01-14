@@ -6787,6 +6787,14 @@ namespace Crimson.DataAccessLayer
                 },
                 Macros = pubgList,
             });
+
+            _games.Add(new Game()
+            {
+                Name = "RUST new",
+                IconPath = "pack://application:,,,/Resources/RustIcon_2.png",
+                Commentary = new string[] {string.Empty, string.Empty, string.Empty },
+                Macros = new List<Macro> { new RustMacro()}
+            });
         }
     }
 }
