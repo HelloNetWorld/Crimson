@@ -207,6 +207,18 @@ namespace Crimson.ViewModels
             Visibility.Hidden : Visibility.Visible;
 
         /// <summary>
+        /// Задаёт и получает видимость элементов управления связанных c описанием.
+        /// </summary>
+        public Visibility CommentsVisibility
+            => HasRustProvider ? Visibility.Hidden : Visibility.Visible;
+
+        /// <summary>
+        /// Задаёт и получает видимость элементов управления связанных c описанием.
+        /// </summary>
+        public Visibility RustSettingsVisibility
+            => HasRustProvider ? Visibility.Visible : Visibility.Hidden;
+
+        /// <summary>
         /// Получает первую вставку текста в textBlock (Инструкция к настройкам игры).
         /// </summary>
         public string FirstComment => _game.Commentary.Any() ? _game.Commentary[0] ?? String.Empty : String.Empty;
@@ -315,6 +327,11 @@ namespace Crimson.ViewModels
         /// Признак того, что используеьтся поставщик данных для макросов.
         /// </summary>
         public bool HasShiftProvider => _game?.ShiftProvider != null;
+
+        /// <summary>
+        /// Признак того, что используеьтся поставщик данных для макросов rust.
+        /// </summary>
+        public bool HasRustProvider => _game?.ShiftProvider != null && _game?.ShiftProvider is IRustShiftProvider;
 
         #endregion
 

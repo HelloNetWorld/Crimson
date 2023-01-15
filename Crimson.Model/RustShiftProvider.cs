@@ -140,7 +140,7 @@ namespace Crimson.Models
         {
             SelectedWeapon = RustWeapon.AK47;
             WeaponMod = RustWeaponMod.None;
-            Sensitivity = 1.0;
+            Sensitivity = 0.9;
             Fov = 90;
             IsCrawling = false;
         }
@@ -153,8 +153,19 @@ namespace Crimson.Models
         public RustWeaponMod WeaponMod { get; set; }
 
         // TODO: Добавить граничные значения для Sensivity и Fov.
+        /// <summary>
+        /// Mouse sensitivity. Min = 0.0, Max = 2.0
+        /// </summary>
         public double Sensitivity { get; set; }
+
+        /// <summary>
+        /// FOV. min = 70.0, max = 90.0 
+        /// </summary>
         public int Fov { get; set; }
+
+        /// <summary>
+        /// Признак режима приседания.
+        /// </summary>
         public bool IsCrawling { get; set; }
 
         #endregion
