@@ -45,9 +45,11 @@
     <Compile Include="IInstruction.cs" />
     <Compile Include="InstructionEnum.cs" />
     <Compile Include="Instructions.cs" />
+    <Compile Include="IRustShiftProvider.cs" />
+    <Compile Include="IShiftProvider.cs" />
     <Compile Include="Macro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RustMacro.cs" />
+    <Compile Include="RustShiftProvider.cs" />
     <Compile Include="Scope.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

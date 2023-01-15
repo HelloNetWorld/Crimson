@@ -6792,8 +6792,9 @@ namespace Crimson.DataAccessLayer
             {
                 Name = "RUST new",
                 IconPath = "pack://application:,,,/Resources/RustIcon_2.png",
-                Commentary = new string[] {string.Empty, string.Empty, string.Empty },
-                Macros = new List<Macro> { new RustMacro()}
+                Commentary = new string[] { string.Empty, string.Empty, string.Empty },
+                Macros = new List<Macro>(),
+                ShiftProvider = new RustShiftProvider()
             });
         }
     }

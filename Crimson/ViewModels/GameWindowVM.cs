@@ -84,7 +84,34 @@ namespace Crimson.ViewModels
         {
             if (_game != null)
             {
-                Macros = _game.Macros.ToObservableCollection();
+                // if game is rust.
+                if(this.HasShiftProvider && _game.ShiftProvider is IRustShiftProvider)
+                {
+                    var scopes = new List<Scope>();
+                    foreach (RustWeaponMod mod in (RustWeaponMod[])Enum.GetValues(typeof(RustWeaponMod)))
+                    {
+                        scopes.Add(new Scope()
+                        {
+                            Name = mod.ToString(),
+                            Multiplier = 1.0
+                        });
+                    }
+
+                    foreach (RustWeapon weapon in (RustWeapon[])Enum.GetValues(typeof(RustWeapon)))
+                    {
+                        if(_game.Macros != null)
+                        {
+                            _game.Macros.Add(new Macro()
+                            {
+                                Name = weapon.ToString(),
+                                Description = weapon.ToString(),
+                                Scopes = scopes,
+                            });
+                        }
+                    }
+                }
+
+                Macros = _game.Macros?.ToObservableCollection();
                 SelectedMacroIndex = 0;
             }
         }
@@ -283,6 +310,11 @@ namespace Crimson.ViewModels
         /// Задаёт или получает команду включения макроса.
         /// </summary>
         public DelegateCommand<object> ActivateMacros { get; set; }
+
+        /// <summary>
+        /// Признак того, что используеьтся поставщик данных для макросов.
+        /// </summary>
+        public bool HasShiftProvider => _game?.ShiftProvider != null;
 
         #endregion
 

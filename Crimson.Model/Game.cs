@@ -32,5 +32,10 @@ namespace Crimson.Models
         /// Флаг указывающий разрешено ли удалять данный Item из Repository.
         /// </summary>
         public bool Removable { get; set; }
+
+        /// <summary>
+        /// Задаёт поставщика данных для сдвигов.
+        /// </summary>
+        public IShiftProvider ShiftProvider { get; set; }
     }
 }

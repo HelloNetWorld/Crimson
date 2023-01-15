@@ -9,16 +9,85 @@ using System.Net.Sockets;
 namespace Crimson.Models
 {
     /// <summary>
-    /// Представляет данные для Rust.
+    /// Представляет данные сдвига для Раста.
     /// </summary>
-    public class RustMacro : Macro
+    public class RustShiftProvider : IShiftProvider, IRustShiftProvider
     {
         #region Static
 
         #region Points
 
-        private static List<(double, double)> AK47Points = new List<(double X, double Y)> { (0.000000, -2.257792), (0.323242, -2.300758), (0.649593, -2.299759), (0.848786, -2.259034), (1.075408, -2.323947), (1.268491, -2.215956), (1.330963, -2.236556), (1.336833, -2.218203), (1.505516, -2.143454), (1.504423, -2.233091), (1.442116, -2.270194), (1.478543, -2.204318), (1.392874, -2.165817), (1.480824, -2.177887), (1.597069, -2.270915), (1.449996, -2.145893), (1.369179, -2.270450), (1.582363, -2.298334), (1.516872, -2.235066), (1.498249, -2.238401), (1.465769, -2.331642), (1.564812, -2.242621), (1.517519, -2.303052), (1.422433, -2.211946), (1.553195, -2.248043), (1.510463, -2.285327), (1.553878, -2.240047), (1.520380, -2.221839), (1.553878, -2.240047), (1.553195, -2.248043) };
-        private static List<(double, double)> LR300Points = new List<(double X, double Y)> { (0.000000, -2.052616), (0.055584, -1.897695), (-0.247226, -1.863222), (-0.243871, -1.940010), (0.095727, -1.966751), (0.107707, -1.885520), (0.324888, -1.946722), (-0.181137, -1.880342), (0.162399, -1.820107), (-0.292076, -1.994940), (0.064575, -1.837156), (-0.126699, -1.887880), (-0.090568, -1.832799), (0.065338, -1.807480), (-0.197343, -1.705888), (-0.216561, -1.785949), (0.042567, -1.806371), (-0.065534, -1.757623), (0.086380, -1.904010), (-0.097326, -1.969296), (-0.213034, -1.850288), (-0.017790, -1.730867), (-0.045577, -1.783686), (-0.053309, -1.886260), (0.055072, -1.793076), (-0.091874, -1.921906), (-0.033719, -1.796160), (0.266464, -1.993952), (0.079090, -1.921165) };
+        private static List<(double, double)> AK47Points = new List<(double X, double Y)> {
+            (0.000000, -2.257792),
+            (0.323242, -2.300758),
+            (0.649593, -2.299759),
+            (0.848786, -2.259034),
+            (1.075408, -2.323947),
+
+            (1.268491, -2.215956),
+            (1.330963, -2.236556),
+            (1.336833, -2.218203),
+            (1.505516, -2.143454),
+            (1.504423, -2.233091),
+
+            (1.442116, -2.270194),
+            (1.478543, -2.204318),
+            (1.392874, -2.165817),
+            (1.480824, -2.177887),
+            (1.597069, -2.270915),
+
+            (1.449996, -2.145893),
+            (1.369179, -2.270450),
+            (1.582363, -2.298334),
+            (1.516872, -2.235066),
+            (1.498249, -2.238401),
+
+            (1.465769, -2.331642),
+            (1.564812, -2.242621),
+            (1.517519, -2.303052),
+            (1.422433, -2.211946),
+            (1.553195, -2.248043),
+
+            (1.510463, -2.285327),
+            (1.553878, -2.240047),
+            (1.520380, -2.221839),
+            (1.553878, -2.240047),
+            (1.553195, -2.248043) };
+        private static List<(double, double)> LR300Points = new List<(double X, double Y)> {
+            (0.000000, -2.052616),
+            (0.055584, -1.897695),
+            (-0.247226, -1.863222),
+            (-0.243871, -1.940010),
+            (0.095727, -1.966751),
+
+            (0.107707, -1.885520),
+            (0.324888, -1.946722),
+            (-0.181137, -1.880342),
+            (0.162399, -1.820107),
+            (-0.292076, -1.994940),
+
+            (0.064575, -1.837156),
+            (-0.126699, -1.887880),
+            (-0.090568, -1.832799),
+            (0.065338, -1.807480),
+            (-0.197343, -1.705888),
+
+            (-0.216561, -1.785949),
+            (0.042567, -1.806371),
+            (-0.065534, -1.757623),
+            (0.086380, -1.904010),
+            (-0.097326, -1.969296),
+
+            (-0.213034, -1.850288),
+            (-0.017790, -1.730867),
+            (-0.045577, -1.783686),
+            (-0.053309, -1.886260),
+            (0.055072, -1.793076),
+
+            (-0.091874, -1.921906),
+            (-0.033719, -1.796160),
+            (0.266464, -1.993952),
+            (0.079090, -1.921165) };
         private static List<(double, double)> M249Points = new List<(double X, double Y)> { (0, -1.49), (0.39375, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.720, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900), (0.0, -1.4900) };
         private static List<(double, double)> HMLMGPoints = new List<(double X, double Y)> { (0, -1.4), (-0.39, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4), (-0.73, -1.4) };
         private static List<(double, double)> MP5Points = new List<(double X, double Y)> { (0.125361, -1.052446), (-0.099548, -0.931548), (0.027825, -0.954094), (-0.013715, -0.851504), (-0.007947, -1.070579), (0.096096, -1.018017), (-0.045937, -0.794216), (0.034316, -1.112618), (-0.003968, -0.930040), (-0.009403, -0.888503), (0.140813, -0.970807), (-0.015052, -1.046551), (0.095699, -0.860475), (-0.269643, -1.038896), (0.000285, -0.840478), (0.018413, -1.038126), (0.099191, -0.851701), (0.199659, -0.893041), (-0.082660, -1.069278), (0.006826, -0.881493), (0.091709, -1.150956), (-0.108677, -0.965513), (0.169612, -1.099499), (-0.038244, -1.120084), (-0.085513, -0.876956), (0.136279, -1.047589), (0.196392, -1.039977), (-0.152513, -1.209291), (-0.214510, -0.956648), (0.034276, -0.095177) };
@@ -31,15 +100,15 @@ namespace Crimson.Models
 
         #region Weapon delays
 
-        public static double AK47Delay = 133.33;
-        public static double LR300Delay = 120.0;
-        public static double M249Delay = 100.0;
-        public static double HMLMGDelay = 100.0;
-        public static double MP5Delay = 89.0;
-        public static double ThompsonDelay = 113.0;
-        public static double CustomDelay = 90.0;
-        public static double PythonDelay = 125.0;
-        public static double SemiDelay = 175.0;
+        private static double AK47Delay = 133.33;
+        private static double LR300Delay = 120.0;
+        private static double M249Delay = 100.0;
+        private static double HMLMGDelay = 100.0;
+        private static double MP5Delay = 89.0;
+        private static double ThompsonDelay = 113.0;
+        private static double CustomDelay = 90.0;
+        private static double PythonDelay = 125.0;
+        private static double SemiDelay = 175.0;
 
         #endregion
 
@@ -67,11 +136,11 @@ namespace Crimson.Models
         /// <summary>
         /// Создаёт новый объект <see cref="RustMacro"/>.
         /// </summary>
-        public RustMacro()
+        public RustShiftProvider()
         {
             SelectedWeapon = RustWeapon.AK47;
-            WeaponMod = RustWeaponMod.ScopeNone;
-            Sensitivity= 1.0;
+            WeaponMod = RustWeaponMod.None;
+            Sensitivity = 1.0;
             Fov = 90;
             IsCrawling = false;
         }
@@ -107,17 +176,17 @@ namespace Crimson.Models
                 case RustWeapon.AK47:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -127,17 +196,17 @@ namespace Crimson.Models
                 case RustWeapon.LR300:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -147,17 +216,17 @@ namespace Crimson.Models
                 case RustWeapon.M249:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -167,17 +236,17 @@ namespace Crimson.Models
                 case RustWeapon.HMLMG:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -187,17 +256,17 @@ namespace Crimson.Models
                 case RustWeapon.MP5:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -207,17 +276,17 @@ namespace Crimson.Models
                 case RustWeapon.Thompson:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -227,17 +296,17 @@ namespace Crimson.Models
                 case RustWeapon.Custom:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -247,17 +316,17 @@ namespace Crimson.Models
                 case RustWeapon.Python:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -267,17 +336,17 @@ namespace Crimson.Models
                 case RustWeapon.Semi:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -287,17 +356,17 @@ namespace Crimson.Models
                 default:
                     switch (WeaponMod)
                     {
-                        case RustWeaponMod.Scope8x:
+                        case RustWeaponMod.X8:
                             scopeKoeff = Scope8x;
                             break;
-                        case RustWeaponMod.ScopeHolo:
+                        case RustWeaponMod.Holo:
                             scopeKoeff = ScopeHolo;
                             break;
-                        case RustWeaponMod.ScopeHand:
+                        case RustWeaponMod.Hand:
                             scopeKoeff = ScopeHand;
                             break;
                         default:
-                        case RustWeaponMod.ScopeNone:
+                        case RustWeaponMod.None:
                             scopeKoeff = ScopeNone;
                             break;
                     }
@@ -306,15 +375,46 @@ namespace Crimson.Models
                     return (CalculateShift(shift.Item1, scopeKoeff), CalculateShift(shift.Item2, scopeKoeff));
             }
 
-            
+
         }
 
+        /// <summary>
+        /// Сбрасывает внутренний индекс следующего смещения.
+        /// </summary>
         public void Reset()
         {
             _index = 0;
         }
 
-
+        /// <summary>
+        /// Возвращает задержку между выстрелами для текущего оружия.
+        /// </summary>
+        /// <returns></returns>
+        public double GetDelay()
+        {
+            switch (SelectedWeapon)
+            {
+                case RustWeapon.LR300:
+                    return LR300Delay;
+                case RustWeapon.M249:
+                    return M249Delay;
+                case RustWeapon.HMLMG:
+                    return HMLMGDelay;
+                case RustWeapon.MP5:
+                    return MP5Delay;
+                case RustWeapon.Thompson:
+                    return ThompsonDelay;
+                case RustWeapon.Custom:
+                    return CustomDelay;
+                case RustWeapon.Python:
+                    return PythonDelay;
+                case RustWeapon.Semi:
+                    return SemiDelay;
+                default:
+                case RustWeapon.AK47:
+                    return AK47Delay;
+            }
+        }
 
         #endregion
 
@@ -323,13 +423,13 @@ namespace Crimson.Models
         private void AdjustIndex()
         {
             if (_index < 0)
-                _index= 0;
+                _index = 0;
 
             switch (SelectedWeapon)
             {
                 case RustWeapon.AK47:
-                    if(_index >= AK47Points.Count)
-                        _index= 0;
+                    if (_index >= AK47Points.Count)
+                        _index = 0;
                     break;
                 case RustWeapon.LR300:
                     if (_index >= LR300Points.Count)
@@ -399,8 +499,8 @@ public enum RustWeapon
 
 public enum RustWeaponMod
 {
-    Scope8x,
-    ScopeHolo, 
-    ScopeHand, 
-    ScopeNone
+    None,
+    Hand, 
+    Holo, 
+    X8,
 }
